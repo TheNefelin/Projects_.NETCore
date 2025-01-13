@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{0344107F-0A63-4B1E-A2D1-2E26A1178CA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary.GuiaJuegos", "ClassLibrary.GuiaJuegos\ClassLibrary.GuiaJuegos.csproj", "{1A362764-B571-4C62-AE2D-BDDC9DAB03C1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlServer", "SqlServer", "{5B3453C3-2210-4778-BEB6-93427EE4F104}"
+	ProjectSection(SolutionItems) = preProject
+		GuiaJuegos.sql = GuiaJuegos.sql
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0344107F-0A63-4B1E-A2D1-2E26A1178CA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0344107F-0A63-4B1E-A2D1-2E26A1178CA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0344107F-0A63-4B1E-A2D1-2E26A1178CA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0344107F-0A63-4B1E-A2D1-2E26A1178CA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A362764-B571-4C62-AE2D-BDDC9DAB03C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A362764-B571-4C62-AE2D-BDDC9DAB03C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A362764-B571-4C62-AE2D-BDDC9DAB03C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A362764-B571-4C62-AE2D-BDDC9DAB03C1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
