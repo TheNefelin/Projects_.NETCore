@@ -3,7 +3,7 @@
 ### Dependencies
 ```
 Microsoft.EntityFrameworkCore.SqlServer
-ClassLibrary.GuiaJuegos
+ClassLibrary.GamesGuide
 ```
 
 ### Migracion

@@ -1,13 +1,17 @@
+using ClassLibrary.GamesGuide.Connection;
+using ClassLibrary.GamesGuide.Interfaces;
+using ClassLibrary.GamesGuide.Services;
 using Microsoft.EntityFrameworkCore;
-using WebApi.Connections;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<GuiaJuegosDbContext>(options =>
+builder.Services.AddDbContext<GamesGuideDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("RutaWebSQL"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerWeb"));
 });
+
+builder.Services.AddTransient<IGamesService, GameService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -3,25 +3,25 @@
 -- Tables -------------------------------------------------------
 -- --------------------------------------------------------------
 
-CREATE TABLE GJ_Juegos (
+CREATE TABLE GJ_Games (
 	Id INT PRIMARY KEY IDENTITY(1,1),
-	Nombre VARCHAR(50) NOT NULL,
-	Descripcion VARCHAR(256) NOT NULL,
+	Name VARCHAR(50) NOT NULL,
+	Description VARCHAR(256) NOT NULL,
 	ImgUrl VARCHAR(256) NOT NULL,
-	Activo BIT NOT NULL
+	IdActive BIT NOT NULL
 )
 GO
 
 DROP TABLE __EFMigrationsHistory
 GO
-DROP TABLE GJ_Juegos
+DROP TABLE GJ_Games
 GO
 
 -- Data ---------------------------------------------------------
 -- --------------------------------------------------------------
 
-INSERT INTO GJ_Juegos
-	(Nombre, Descripcion, ImgUrl, Activo)
+INSERT INTO GJ_Games
+	(Name, Description, ImgUrl, IdActive)
 VALUES
 	('Chrono Cross', 'Lejos el mejor RPG en mi opinion personal. Precisamente, este juego, me inspiro hacer esta pagina.', 'cover_cc.webp', 1),
 	('Comrades', 'Creo que soy el único que juega a esto, los servidores siempre están vacíos.', 'cover_com.webp', 1),
@@ -31,7 +31,7 @@ VALUES
 -- Query --------------------------------------------------------
 -- --------------------------------------------------------------
 
-SELECT * FROM GJ_Juegos
+SELECT * FROM GJ_Games
 
 -- --------------------------------------------------------------
 -- --------------------------------------------------------------
