@@ -1,6 +1,6 @@
 ﻿namespace ClassLibrary.GamesGuide.DTOs
 {
-    public class DataBackgroundImgDTO
+    public class DataBackgroundDTO
     {
         public int Id { get; set; }
         public string ImgUrl { get; set; } = string.Empty;

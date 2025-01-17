@@ -12,7 +12,8 @@ namespace ClassLibrary.GamesGuide.Connection
         public DbSet<GameEntity> GG_Games { get; set; }
         public DbSet<CharacterEntity> GG_Characters { get; set; }
         public DbSet<SourceEntity> GG_Sources { get; set; }
-        public DbSet<BackgroundImgEntity> GG_BackgroundImg { get; set; }
+        public DbSet<BackgroundEntity> GG_Backgrounds { get; set; }
+        public DbSet<GuideEntity> GG_Guides { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -47,12 +48,22 @@ namespace ClassLibrary.GamesGuide.Connection
                     .OnDelete(DeleteBehavior.Restrict);
             });
 
-            modelBuilder.Entity<BackgroundImgEntity>(t =>
+            modelBuilder.Entity<BackgroundEntity>(t =>
             {
                 t.HasKey(e => e.Id);
                 t.Property(e => e.ImgUrl).HasColumnType("VARCHAR(256)");
                 t.HasOne(tr => tr.Game)
-                    .WithMany(tr => tr.BackgroundImg)
+                    .WithMany(tr => tr.Backgrounds)
+                    .HasForeignKey(c => c.Id_Game)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            modelBuilder.Entity<GuideEntity>(t =>
+            {
+                t.HasKey(e => e.Id);
+                t.Property(e => e.Name).HasColumnType("VARCHAR(100)");
+                t.HasOne(tr => tr.Game)
+                    .WithMany(tr => tr.Guides)
                     .HasForeignKey(c => c.Id_Game)
                     .OnDelete(DeleteBehavior.Restrict);
             });

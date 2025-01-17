@@ -26,7 +26,8 @@ namespace ClassLibrary.GamesGuide.Services
                 var result = await _context.GG_Games
                     .Include(t => t.Characters)
                     .Include(t => t.Source)
-                    .Include(t => t.BackgroundImg)
+                    .Include(t => t.Backgrounds)
+                    .Include(t => t.Guides)
                     .ToListAsync(cancellationToken);
 
                 var gamesDTO = result.Select(e => new DataGameDTO()
@@ -35,6 +36,7 @@ namespace ClassLibrary.GamesGuide.Services
                     Name = e.Name,
                     Description = e.Description,
                     ImgUrl = e.ImgUrl,
+                    IsActive = e.IdActive,
                     Characters = e.Characters.Select(ch => new DataCharacterDTO()
                     {
                         Id = ch.Id,
@@ -48,10 +50,16 @@ namespace ClassLibrary.GamesGuide.Services
                         Name = sc.Name,
                         ImgUrl = sc.ImgUrl,
                     }).ToList(),
-                    BackgroundImg = e.BackgroundImg.Select(sc => new DataBackgroundImgDTO()
+                    Backgrounds = e.Backgrounds.Select(bg => new DataBackgroundDTO()
                     {
-                        Id = sc.Id,
-                        ImgUrl = sc.ImgUrl,
+                        Id = bg.Id,
+                        ImgUrl = bg.ImgUrl,
+                    }).ToList(),
+                    Guides = e.Guides.Select(gu => new DataGuideDTO()
+                    {
+                        Id = gu.Id,
+                        Name = gu.Name,
+                        Sort = gu.Sort,
                     }).ToList(),
                 }).ToList();
 

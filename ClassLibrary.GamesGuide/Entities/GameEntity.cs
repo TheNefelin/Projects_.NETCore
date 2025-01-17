@@ -9,6 +9,7 @@
         public bool IdActive { get; set; }
         public ICollection<CharacterEntity> Characters { get; set; }
         public ICollection<SourceEntity> Source { get; set; }
-        public ICollection<BackgroundImgEntity> BackgroundImg { get; set; }
+        public ICollection<BackgroundEntity> Backgrounds { get; set; }
+        public ICollection<GuideEntity> Guides { get; set; }
     }
 }

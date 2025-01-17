@@ -1,9 +1,10 @@
 ﻿namespace ClassLibrary.GamesGuide.Entities
 {
-    public class BackgroundImgEntity
+    public class GuideEntity
     {
         public int Id { get; set; }
-        public string ImgUrl { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
+        public int Sort { get; set; }
         public int Id_Game { get; set; }
         public GameEntity Game { get; set; }
     }

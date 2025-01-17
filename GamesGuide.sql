@@ -17,8 +17,8 @@ CREATE TABLE GG_Characters (
 	Name VARCHAR(50) NOT NULL,
 	Description VARCHAR(256) NOT NULL,
 	ImgUrl VARCHAR(256) NOT NULL,
-	Id_Game INT NOT NULL
-	FOREIGN KEY (Id_Game) REFERENCES GG_Games(Id),
+	Id_Game INT NOT NULL,
+	FOREIGN KEY (Id_Game) REFERENCES GG_Games(Id)
 )
 GO
 
@@ -26,22 +26,33 @@ CREATE TABLE GG_Sources (
 	Id INT PRIMARY KEY IDENTITY(1,1),
 	Name VARCHAR(50) NOT NULL,
 	ImgUrl VARCHAR(256) NOT NULL,
-	Id_Game INT NOT NULL
-	FOREIGN KEY (Id_Game) REFERENCES GG_Games(Id),
+	Id_Game INT NOT NULL,
+	FOREIGN KEY (Id_Game) REFERENCES GG_Games(Id)
 )
 GO
 
-CREATE TABLE GG_BackgroundImg (
+CREATE TABLE GG_Backgrounds (
 	Id INT PRIMARY KEY IDENTITY(1,1),
 	ImgUrl VARCHAR(256) NOT NULL,
-	Id_Game INT NOT NULL
+	Id_Game INT NOT NULL,
+	FOREIGN KEY (Id_Game) REFERENCES GG_Games(Id)
+)
+GO
+
+CREATE TABLE GG_Guides (
+	Id INT PRIMARY KEY IDENTITY(1,1),
+	Name VARCHAR(100) NOT NULL,
+	Sort INT NOT NULL,
+	Id_Game INT NOT NULL,
 	FOREIGN KEY (Id_Game) REFERENCES GG_Games(Id),
 )
 GO
 
 DROP TABLE __EFMigrationsHistory
 GO
-DROP TABLE GG_BackgroundImg
+DROP TABLE GG_Guides
+GO
+DROP TABLE GG_Backgrounds
 GO
 DROP TABLE GG_Sources
 GO
@@ -143,9 +154,9 @@ GO
 SET IDENTITY_INSERT GG_Sources OFF
 GO
 
-SET IDENTITY_INSERT GG_BackgroundImg ON
+SET IDENTITY_INSERT GG_Backgrounds ON
 GO
-INSERT INTO GG_BackgroundImg
+INSERT INTO GG_Backgrounds
 	(Id, ImgUrl, Id_Game)
 VALUES
 	(1,'cc_background_01.webp',1),
@@ -160,7 +171,110 @@ VALUES
 	(10,'com_background_02.webp',2),
 	(11,'ffix_background_02.webp',4)	
 GO
-SET IDENTITY_INSERT GG_BackgroundImg OFF
+SET IDENTITY_INSERT GG_Backgrounds OFF
+GO
+
+SET IDENTITY_INSERT GG_Guides ON
+GO
+INSERT INTO GG_Guides
+	(Id, Name, Sort, Id_Game)
+VALUES
+	(1,'El Sueño',1,1),
+	(2,'Final oculto: Programmers Ending (Final 1/11)',2,1),
+	(3,'(HW) Arni Village',3,1),
+	(4,'(HW) Lizard Rock',4,1),
+	(5,'(AW) Another World',5,1),
+	(6,'(AW) Hydra Swamp',6,1),
+	(7,'(AW) Fossil Valley',7,1),
+	(8,'(AW) Termina',8,1),
+	(9,'Final oculto: General Kid (Final 2/11)',9,1),
+	(10,'(AW) Infiltración a Viper Manor',10,1),
+	(11,'(AW) Viper Manor',11,1),
+	(12,'Final oculto: The True Hero (Final 3/11)',12,1),
+	(13,'(AW) Guldove',13,1),
+	(14,'(HW) Bosque Hydra',14,1),
+	(15,'(AW) Piratas Fantasmas',15,1),
+	(16,'(AW) Guldove | Termina | Viper Manor',16,1),
+	(17,'(HW) Arni Village',17,1),
+	(18,'(AW) Costa Este de El Nido',18,1),
+	(19,'Final oculto: The Magical Dreamers (Final 4/11)',19,1),
+	(20,'(AW) Fort Dragonia',20,1),
+	(21,'Mundo Abstracto y el Más Allá',21,1),
+	(22,'Final oculto: New Beginnings (Final 5/11)',22,1),
+	(23,'(HW) Termina',23,1),
+	(24,'(HW) Viper Manor',24,1),
+	(25,'(HW) Nido Triangle | Sky Dragon Isle | Marbule',25,1),
+	(26,'(HW) El Zelbess de Fargo',26,1),
+	(27,'(HW) Mar del Edén',27,1),
+	(28,'(HW) Isla Maldita',28,1),
+	(29,'(HW) Mar del Edén',29,1),
+	(30,'(AW) Hydra Swamp | Termina',30,1),
+	(31,'(AW) Viper Manor',31,1),
+	(32,'Final oculto: Onward Dragoons (Final 6/11)',32,1),
+	(33,'(AW) Guldove | Water Dragon Isle | Isle of the Damned | Termina',33,1),
+	(34,'(AW) Hermits Hideaway',34,1),
+	(35,'Final oculto: Darkened Fate (Final 7/11)',35,1),
+	(36,'(AW) Isla del Dragón del Cielo',36,1),
+	(37,'(HW) Preparación',37,1),
+	(38,'(HW) Dragón Verde',38,1),
+	(39,'(HW) Dragón de Agua',39,1),
+	(40,'(HW) Dragón de Tierra',40,1),
+	(41,'(AW) Dragón de Fuego',41,1),
+	(42,'(AW) Dragón Negro',42,1),
+	(43,'(AW) Dragón del Cielo',43,1),
+	(44,'(AW) Criosphinx',44,1),
+	(45,'(AW) Guldove',45,1),
+	(46,'(HW) Fuerte Dragonian',46,1),
+	(47,'(AW) La Búsqueda de la Masamune',47,1),
+	(48,'Final oculto: Career Change (Final 8/11)',48,1),
+	(49,'(HW) Mar de Edén',49,1),
+	(50,'(HW) Chronopolis',50,1),
+	(51,'(AW) Cascadas Divinas de los Dragones',51,1),
+	(52,'Cosas por Hacer',52,1),
+	(53,'(AW) Hermits Hideaway',53,1),
+	(54,'(AW) El Nido Triangle',54,1),
+	(55,'Final oculto: Return of the Downtrodden (Final 9/11)',55,1),
+	(56,'(AW) Dinopolis y Terra Tower',56,1),
+	(57,'(HW) Playa Opassa',57,1),
+	(58,'Final: True Ending (Final 10/11)',58,1),
+	(59,'Final: Bad Ending (Final 11/11)',59,1),
+	(60,'Consideraciones',60,1),
+	(61,'Lanza - Bigote de Dragón (1)',1,2),
+	(62,'Lanza - Bigote de Dragón (2)',2,2),
+	(63,'Mazo - Mjolnir',3,2),
+	(64,'Katana - Mumeito (1)',4,2),
+	(65,'Katana - Mumeito (2)',5,2),
+	(66,'Escudo - Égida',6,2),
+	(67,'SET Equipo de combate',7,2),
+	(68,'The Forge Land',1,3),
+	(69,'The Forge Land - The Cauldron',2,3),
+	(70,'The Forge Land - The Drenchfort',3,3),
+	(71,'The Forge Land - The Foundry',4,3),
+	(72,'The Forge Land - The Lost Temple',5,3),
+	(73,'The Forge Land - The Nook',6,3),
+	(74,'The Forge Land - The Scar',7,3),
+	(75,'The Forge Land - The Shattered Forge',8,3),
+	(76,'The Forge Land - The Weeping Crag',9,3),
+	(77,'The Forge Land - Tri-Stone',10,3),
+	(78,'Kingdom of the Dead',11,3),
+	(79,'Kingdom of the Dead - Boneriven',12,3),
+	(80,'Kingdom of the Dead - Breach',13,3),
+	(81,'Kingdom of the Dead - City of the Dead',14,3),
+	(82,'Kingdom of the Dead - Eternal Throne',15,3),
+	(83,'Kingdom of the Dead - Gilded Arena',16,3),
+	(84,'Kingdom of the Dead - Judicators Tomb',17,3),
+	(85,'Kingdom of the Dead - Lair of the Deposed King',18,3),
+	(86,'Kingdom of the Dead - Phariseers Tomb',19,3),
+	(87,'Kingdom of the Dead - Psychameron',20,3),
+	(88,'Kingdom of the Dead - Sentinels Gaza',21,3),
+	(89,'Bezswietle',22,3),
+	(90,'Bezswietle - Earth',23,3),
+	(91,'Bezswietle - The Ivory Citadel',24,3),
+	(92,'Shadows Edge',25,3),
+	(93,'Shadows Edge - The Black Stone',26,3),
+	(94,'El concurso de Ragtime',1,4)	
+GO
+SET IDENTITY_INSERT GG_Guides OFF
 GO
 
 -- Query --------------------------------------------------------
@@ -169,7 +283,8 @@ GO
 SELECT * FROM GG_Games
 SELECT * FROM GG_Characters
 SELECT * FROM GG_Sources
-SELECT * FROM GG_BackgroundImg
+SELECT * FROM GG_Backgrounds
+SELECT * FROM GG_Guides
 
 -- --------------------------------------------------------------
 -- --------------------------------------------------------------
