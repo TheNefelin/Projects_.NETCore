@@ -10,17 +10,52 @@ namespace ClassLibrary.GamesGuide.Connection
         }
 
         public DbSet<GameEntity> GG_Games { get; set; }
+        public DbSet<CharacterEntity> GG_Characters { get; set; }
+        public DbSet<SourceEntity> GG_Sources { get; set; }
+        public DbSet<BackgroundImgEntity> GG_BackgroundImg { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<GameEntity>(t =>
             {
-                t.HasKey(c => c.Id);
-                t.Property(c => c.Name).HasColumnType("VARCHAR(50)");
-                t.Property(c => c.Description).HasColumnType("VARCHAR(256)");
-                t.Property(c => c.ImgUrl).HasColumnType("VARCHAR(256)");
+                t.HasKey(e => e.Id);
+                t.Property(e => e.Name).HasColumnType("VARCHAR(50)");
+                t.Property(e => e.Description).HasColumnType("VARCHAR(256)");
+                t.Property(e => e.ImgUrl).HasColumnType("VARCHAR(256)");
             });
 
+            modelBuilder.Entity<CharacterEntity>(t =>
+            {
+                t.HasKey(e => e.Id);
+                t.Property(e => e.Name).HasColumnType("VARCHAR(50)");
+                t.Property(e => e.Description).HasColumnType("VARCHAR(256)");
+                t.Property(e => e.ImgUrl).HasColumnType("VARCHAR(256)");
+                t.HasOne(tr => tr.Game)
+                    .WithMany(tr => tr.Characters)
+                    .HasForeignKey(c => c.Id_Game)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            modelBuilder.Entity<SourceEntity>(t =>
+            {
+                t.HasKey(e => e.Id);
+                t.Property(e => e.Name).HasColumnType("VARCHAR(50)");
+                t.Property(e => e.ImgUrl).HasColumnType("VARCHAR(256)");
+                t.HasOne(tr => tr.Game)
+                    .WithMany(tr => tr.Source)
+                    .HasForeignKey(c => c.Id_Game)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            modelBuilder.Entity<BackgroundImgEntity>(t =>
+            {
+                t.HasKey(e => e.Id);
+                t.Property(e => e.ImgUrl).HasColumnType("VARCHAR(256)");
+                t.HasOne(tr => tr.Game)
+                    .WithMany(tr => tr.BackgroundImg)
+                    .HasForeignKey(c => c.Id_Game)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
         }
     }
 }

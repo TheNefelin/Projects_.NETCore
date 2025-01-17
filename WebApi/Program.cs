@@ -11,6 +11,7 @@ builder.Services.AddDbContext<GamesGuideDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerWeb"));
 });
 
+builder.Services.AddTransient<IPublicService, PublicService>();
 builder.Services.AddTransient<IGamesService, GameService>();
 
 builder.Services.AddControllers();

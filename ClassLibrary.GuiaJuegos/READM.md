@@ -43,19 +43,19 @@ public class GuiaJuegosDbContext : DbContext
     public DbSet<GJJuegoEntity> GJ_Juegos { get; set; }
 }
 ```
-### Usar Consola NuGet
-* Migracion generica
+### Use NuGet Console
+* Generic Migration
 ```
 Add-Migration Inicial
 Update-DataBase
 ```
-* Migracion especifica
+* Specific Migration
 ```
 Add-Migration -Context GuiaJuegosDbContext Inicial
 Update-DataBase -Context GuiaJuegosDbContext
 ```
 > [!WARNING]  
-> Estos comandos se deben unsar en el projecto que contienen las entidades que representan la Base de Datos.
+> These commands must be used in the project that contains the entities that represent the Database.
 
 ## Services
 ```
