@@ -8,7 +8,7 @@ CREATE TABLE GG_Games (
 	Name VARCHAR(50) NOT NULL,
 	Description VARCHAR(256) NOT NULL,
 	ImgUrl VARCHAR(256) NOT NULL,
-	IdActive BIT NOT NULL
+	IsActive BIT NOT NULL
 )
 GO
 
@@ -67,12 +67,12 @@ GO
 SET IDENTITY_INSERT GG_Games ON
 GO
 INSERT INTO GG_Games
-	(Id, Name, Description, ImgUrl, IdActive)
+	(Id, Name, Description, ImgUrl, IsActive)
 VALUES
-	(1, 'Chrono Cross', 'Lejos el mejor RPG en mi opinion personal. Precisamente, este juego, me inspiro hacer esta pagina.', 'cover_cc.webp', 1),
-	(2, 'Comrades', 'Creo que soy el único que juega a esto, los servidores siempre están vacíos.', 'cover_com.webp', 1),
-	(3, 'Darksiders 2', 'Un MANJAR de los dioses.', 'cover_ds2.webp', 1),
-	(4, 'FFIX', 'Uno de los trofeos mas duros de conseguir', 'cover_ffix.webp', 1);
+	(1, 'Chrono Cross', 'Lejos el mejor RPG en mi opinion personal. Precisamente, este juego, me inspiro hacer esta pagina.', 'cover_cc_617x617.webp', 1),
+	(2, 'Comrades', 'Creo que soy el único que juega a esto, los servidores siempre están vacíos.', 'cover_com_617x617.webp', 1),
+	(3, 'Darksiders 2', 'Un MANJAR de los dioses.', 'cover_ds2_617x617.webp', 1),
+	(4, 'FFIX', 'Uno de los trofeos mas duros de conseguir', 'cover_ffix_617x617.webp', 1);
 GO
 SET IDENTITY_INSERT GG_Games OFF
 GO
@@ -82,51 +82,51 @@ GO
 INSERT INTO GG_Characters
 	(Id, Name, Description, ImgUrl, Id_Game)
 VALUES
-	(1,'Serge','Se obtiene al inciar la aventura','cc_character_serge.webp',1),
-	(2,'Mojo','Se obtiene con el Shark Tooth Amulet','cc_character_mojo.webp',1),
-	(3,'Leena','Se obtiene rechazando a Kid 3 veces','cc_character_leena.webp',1),
-	(4,'Poshul','Se obtiene rechazando a Kid 3 veces o en Arni Village dandole el hueso','cc_character_poshul.webp',1),
-	(5,'Kid','Se obtiene en Termina o Cape Howl','cc_character_kid.webp',1),
-	(6,'Guile','Se obtiene en Termina hablando con él en el bar','cc_character_guile.webp',1),
-	(7,'Nikki','Se obtiene en Termina hablando con Miki en el barco de Magical Dreamers','cc_character_nikki.webp',1),
-	(8,'Pierre','Se obtiene en Termina entregandole el Heros Medal en la herreria','cc_character_pierre.webp',1),
-	(9,'Glenn','Se obtiene en Termina al decidir No salvar a Kid','cc_character_glenn.webp',1),
-	(10,'Macha','Se obtiene en Termina al decidir No salvar a Kid','cc_character_macha.webp',1),
-	(11,'Doc','Se obtiene en Termina al decidir No salvar a Kid','cc_character_doc.webp',1),
-	(12,'Korcha','Se obtiene en Termina al decidir salvar a Kid','cc_character_korcha.webp',1),
-	(13,'Greco','Se obtiene en Termina al decidir salvar a Kid','cc_character_greco.webp',1),
-	(14,'Razzly','Se obtiene en Hydra Marsh al decidir salvar a Kid','cc_character_razzly.webp',1),
-	(15,'Mel','Se obtiene en Guldove, despue se capturarla y salir de la isla','cc_character_mel.webp',1),
-	(16,'Pip','Se obtiene en el barco fantasma','cc_character_pip.webp',1),
-	(17,'Luccia','Se obtiene en Viper Manor al ir nuevamente','cc_character_luccia.webp',1),
-	(18,'Lynx','Se obtiene despues del evento en Fort Dragonia','cc_character_lynx.webp',1),
-	(19,'Sprigg','Se obtiene en el Mundo Abstracto','cc_character_sprigg.webp',1),
-	(20,'Harle','Se obtiene en el Mundo Abstracto','cc_character_harle.webp',1),
-	(21,'Radius','Se obtiene al vencerlo en Arni Village','cc_character_radius.webp',1),
-	(22,'Zappa','Se obtiene en Termina con Lynx','cc_character_zappa.webp',1),
-	(23,'Van','Se obtiene en Termina con Lynx','cc_character_van.webp',1),
-	(24,'Norris','Se obtiene en Viper Manor si Radius esta en tu equipo','cc_character_norris.webp',1),
-	(25,'Starky','Se obtiene venciendolo en la isla de Sky Dragon','cc_character_starky.webp',1),
-	(26,'Janice','Se obtiene en el Zelbess al ganar el SLAM de combate','cc_character_janice.webp',1),
-	(27,'Sneff','Se obtiene en Zelbess despues de derrotar al sabio','cc_character_sneff.webp',1),
-	(28,'Irenes','Se obtiene en Zelbess despues de derrotar al sabio','cc_character_irenes.webp',1),
-	(29,'Miki','Se obtiene en Zelbess despues de derrotar al sabio','cc_character_miki.webp',1),
-	(30,'Zoah','Se obtiene en el bar de Termina, habitacion oculta','cc_character_zoah.webp',1),
-	(31,'Karsh','Se obtiene en el bar de Termina, habitacion oculta','cc_character_karsh.webp',1),
-	(32,'Orcha','Se obtiene en Viper Manor despues de rescatar a Riddel','cc_character_orcha.webp',1),
-	(33,'Grobyc','Se obtiene en Viper Manor despues del combate con el Mecha','cc_character_grobyc.webp',1),
-	(34,'Skelly','Se obtiene al conseguir todos sus huesos, son 6 en total','cc_character_skelly.webp',1),
-	(35,'Riddel','Se obtiene al rescatarla del ejercito en Viper Manor','cc_character_riddel.webp',1),
-	(36,'Viper','Se obtiene despues de rescatar a Riddel en Viper Manor','cc_character_viper.webp',1),
-	(37,'Fargo','Se obtiene despues de rescatar a Riddel en Viper Manor','cc_character_fargo.webp',1),
-	(38,'Marcy','Se obtiene despues de rescatar a Riddel en Viper Manor','cc_character_marcy.webp',1),
-	(39,'Turnip','Se obtiene en Hermits Hideaway (AW), (HW), utilizando Ice Gun o Ice Breath con Poshul en tu equip','cc_character_turnip.webp',1),
-	(40,'Funguy','Se obtiene en Shadow Forest al darle el Mushroom al hombre de la cueva en la cascada','cc_character_funguy.webp',1),
-	(41,'Neofio','Se obtiene en la pileta de Viper Manor con la Life Sparkle','cc_character_neofio.webp',1),
-	(42,'Leah','Se obtiene al llegar a la isla de Gaeas Navel','cc_character_leah.webp',1),
-	(43,'Steena','Se obtiene en Guldove al mostrarle el Dragon Emblem','cc_character_steena.webp',1),
-	(44,'Draggy','Se obtiene al poner el huevo gigante en Fort Dragonia','cc_character_draggy.webp',1),
-	(45,'Orlha','Se obtiene en Guldove devolviendole el Sapphire Brooch como Serge','cc_character_orlha.webp',1)
+	(1,'Serge','Se obtiene al inciar la aventura','character_cc_serge_288x288.webp',1),
+	(2,'Mojo','Se obtiene con el Shark Tooth Amulet','character_cc_288x288_mojo.webp',1),
+	(3,'Leena','Se obtiene rechazando a Kid 3 veces','character_cc_leena_288x288.webp',1),
+	(4,'Poshul','Se obtiene rechazando a Kid 3 veces o en Arni Village dandole el hueso','character_cc_poshul_288x288.webp',1),
+	(5,'Kid','Se obtiene en Termina o Cape Howl','character_cc_kid_288x288.webp',1),
+	(6,'Guile','Se obtiene en Termina hablando con él en el bar','character_cc_guile_288x288.webp',1),
+	(7,'Nikki','Se obtiene en Termina hablando con Miki en el barco de Magical Dreamers','character_cc_nikki_288x288.webp',1),
+	(8,'Pierre','Se obtiene en Termina entregandole el Heros Medal en la herreria','character_cc_pierre_288x288.webp',1),
+	(9,'Glenn','Se obtiene en Termina al decidir No salvar a Kid','character_cc_glenn_288x288.webp',1),
+	(10,'Macha','Se obtiene en Termina al decidir No salvar a Kid','character_cc_macha_288x288.webp',1),
+	(11,'Doc','Se obtiene en Termina al decidir No salvar a Kid','character_cc_doc_288x288.webp',1),
+	(12,'Korcha','Se obtiene en Termina al decidir salvar a Kid','character_cc_korcha_288x288.webp',1),
+	(13,'Greco','Se obtiene en Termina al decidir salvar a Kid','character_cc_greco_288x288.webp',1),
+	(14,'Razzly','Se obtiene en Hydra Marsh al decidir salvar a Kid','character_cc_razzly_288x288.webp',1),
+	(15,'Mel','Se obtiene en Guldove, despue se capturarla y salir de la isla','character_cc_mel_288x288.webp',1),
+	(16,'Pip','Se obtiene en el barco fantasma','character_cc_pip_288x288.webp',1),
+	(17,'Luccia','Se obtiene en Viper Manor al ir nuevamente','character_cc_luccia_288x288.webp',1),
+	(18,'Lynx','Se obtiene despues del evento en Fort Dragonia','character_cc_lynx_288x288.webp',1),
+	(19,'Sprigg','Se obtiene en el Mundo Abstracto','character_cc_sprigg_288x288.webp',1),
+	(20,'Harle','Se obtiene en el Mundo Abstracto','character_cc_harle_288x288.webp',1),
+	(21,'Radius','Se obtiene al vencerlo en Arni Village','character_cc_radius_288x288.webp',1),
+	(22,'Zappa','Se obtiene en Termina con Lynx','character_cc_zappa_288x288.webp',1),
+	(23,'Van','Se obtiene en Termina con Lynx','character_cc_van_288x288.webp',1),
+	(24,'Norris','Se obtiene en Viper Manor si Radius esta en tu equipo','character_cc_norris_288x288.webp',1),
+	(25,'Starky','Se obtiene venciendolo en la isla de Sky Dragon','character_cc_starky_288x288.webp',1),
+	(26,'Janice','Se obtiene en el Zelbess al ganar el SLAM de combate','character_cc_janice_288x288.webp',1),
+	(27,'Sneff','Se obtiene en Zelbess despues de derrotar al sabio','character_cc_sneff_288x288.webp',1),
+	(28,'Irenes','Se obtiene en Zelbess despues de derrotar al sabio','character_cc_irenes_288x288.webp',1),
+	(29,'Miki','Se obtiene en Zelbess despues de derrotar al sabio','character_cc_miki_288x288.webp',1),
+	(30,'Zoah','Se obtiene en el bar de Termina, habitacion oculta','character_cc_zoah_288x288.webp',1),
+	(31,'Karsh','Se obtiene en el bar de Termina, habitacion oculta','character_cc_karsh_288x288.webp',1),
+	(32,'Orcha','Se obtiene en Viper Manor despues de rescatar a Riddel','character_cc_orcha_288x288.webp',1),
+	(33,'Grobyc','Se obtiene en Viper Manor despues del combate con el Mecha','character_cc_grobyc_288x288.webp',1),
+	(34,'Skelly','Se obtiene al conseguir todos sus huesos, son 6 en total','character_cc_skelly_288x288.webp',1),
+	(35,'Riddel','Se obtiene al rescatarla del ejercito en Viper Manor','character_cc_riddel_288x288.webp',1),
+	(36,'Viper','Se obtiene despues de rescatar a Riddel en Viper Manor','character_cc_viper_288x288.webp',1),
+	(37,'Fargo','Se obtiene despues de rescatar a Riddel en Viper Manor','character_cc_fargo_288x288.webp',1),
+	(38,'Marcy','Se obtiene despues de rescatar a Riddel en Viper Manor','character_cc_marcy_288x288.webp',1),
+	(39,'Turnip','Se obtiene en Hermits Hideaway (AW), (HW), utilizando Ice Gun o Ice Breath con Poshul en tu equip','character_cc_turnip_288x288.webp',1),
+	(40,'Funguy','Se obtiene en Shadow Forest al darle el Mushroom al hombre de la cueva en la cascada','character_cc_funguy_288x288.webp',1),
+	(41,'Neofio','Se obtiene en la pileta de Viper Manor con la Life Sparkle','character_cc_neofio_288x288.webp',1),
+	(42,'Leah','Se obtiene al llegar a la isla de Gaeas Navel','character_cc_leah_288x288.webp',1),
+	(43,'Steena','Se obtiene en Guldove al mostrarle el Dragon Emblem','character_cc_steena_288x288.webp',1),
+	(44,'Draggy','Se obtiene al poner el huevo gigante en Fort Dragonia','character_cc_draggy_288x288.webp',1),
+	(45,'Orlha','Se obtiene en Guldove devolviendole el Sapphire Brooch como Serge','character_cc_orlha_288x288.webp',1)
 GO
 SET IDENTITY_INSERT GG_Characters OFF
 GO
@@ -159,17 +159,14 @@ GO
 INSERT INTO GG_Backgrounds
 	(Id, ImgUrl, Id_Game)
 VALUES
-	(1,'cc_background_01.webp',1),
-	(2,'cc_background_02.webp',1),
-	(3,'com_background_01.webp',2),
-	(4,'ds2_background_01.webp',3),
-	(5,'ds2_background_02.webp',3),
-	(6,'ds2_background_03.webp',3),
-	(7,'ds2_background_04.webp',3),
-	(8,'ds2_background_05.webp',3),
-	(9,'ffix_background_01.webp',4),
-	(10,'com_background_02.webp',2),
-	(11,'ffix_background_02.webp',4)	
+	(1,'background_cc_01_1280x720.webp',1),
+	(2,'background_cc_02_1280x720.webp',1),
+	(3,'background_com_01_1280x720.webp',2),
+	(4,'background_com_02_1280x720.webp',2),
+	(5,'background_ds2_01_1280x720.webp',3),
+	(6,'background_ds2_02_1280x720.webp',3),
+	(7,'background_ffix_01_1280x720.webp',4),
+	(8,'background_ffix_02_1280x720.webp',4)
 GO
 SET IDENTITY_INSERT GG_Backgrounds OFF
 GO

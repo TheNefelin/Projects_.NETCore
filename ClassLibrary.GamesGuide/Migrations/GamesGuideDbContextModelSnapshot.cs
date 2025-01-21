@@ -85,12 +85,12 @@ namespace ClassLibrary.GamesGuide.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR(256)");
 
-                    b.Property<bool>("IdActive")
-                        .HasColumnType("bit");
-
                     b.Property<string>("ImgUrl")
                         .IsRequired()
                         .HasColumnType("VARCHAR(256)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()

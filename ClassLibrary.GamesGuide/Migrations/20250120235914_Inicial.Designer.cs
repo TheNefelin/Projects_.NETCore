@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClassLibrary.GamesGuide.Migrations
 {
     [DbContext(typeof(GamesGuideDbContext))]
-    [Migration("20250117220703_Inicial")]
+    [Migration("20250120235914_Inicial")]
     partial class Inicial
     {
         /// <inheritdoc />
@@ -88,12 +88,12 @@ namespace ClassLibrary.GamesGuide.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR(256)");
 
-                    b.Property<bool>("IdActive")
-                        .HasColumnType("bit");
-
                     b.Property<string>("ImgUrl")
                         .IsRequired()
                         .HasColumnType("VARCHAR(256)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()

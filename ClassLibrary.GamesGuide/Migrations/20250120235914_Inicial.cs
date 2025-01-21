@@ -19,7 +19,7 @@ namespace ClassLibrary.GamesGuide.Migrations
                     Name = table.Column<string>(type: "VARCHAR(50)", nullable: false),
                     Description = table.Column<string>(type: "VARCHAR(256)", nullable: false),
                     ImgUrl = table.Column<string>(type: "VARCHAR(256)", nullable: false),
-                    IdActive = table.Column<bool>(type: "bit", nullable: false)
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

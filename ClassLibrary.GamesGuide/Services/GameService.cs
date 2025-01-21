@@ -32,7 +32,7 @@ namespace ClassLibrary.GamesGuide.Services
                     Name = e.Name,
                     Description = e.Description,
                     ImgUrl = e.ImgUrl,
-                    IdActive = e.IdActive,
+                    IdActive = e.IsActive,
                 }).ToList();
 
                 _logger.LogInformation("Successfully fetched all games.");
@@ -81,7 +81,7 @@ namespace ClassLibrary.GamesGuide.Services
                     Name = result.Name,
                     Description = result.Description,
                     ImgUrl = result.ImgUrl,
-                    IdActive = result.IdActive,
+                    IdActive = result.IsActive,
                 };
 
                 _logger.LogInformation("Successfully fetched game by ID: {Id}", Id);
@@ -115,7 +115,7 @@ namespace ClassLibrary.GamesGuide.Services
                     Name = gameDTO.Name,
                     Description = gameDTO.Description,
                     ImgUrl = gameDTO.ImgUrl,
-                    IdActive = gameDTO.IdActive,
+                    IsActive = gameDTO.IdActive,
                 };
 
                 await _context.GG_Games.AddAsync(entity, cancellationToken);
@@ -165,7 +165,7 @@ namespace ClassLibrary.GamesGuide.Services
                 entity.Name = gameDTO.Name;
                 entity.Description = gameDTO.Description;
                 entity.ImgUrl = gameDTO.ImgUrl;
-                entity.IdActive = gameDTO.IdActive;
+                entity.IsActive = gameDTO.IdActive;
 
                 _context.GG_Games.Update(entity);
                 await _context.SaveChangesAsync(cancellationToken);

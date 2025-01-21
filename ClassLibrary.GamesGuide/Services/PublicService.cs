@@ -36,7 +36,7 @@ namespace ClassLibrary.GamesGuide.Services
                     Name = e.Name,
                     Description = e.Description,
                     ImgUrl = e.ImgUrl,
-                    IsActive = e.IdActive,
+                    IsActive = e.IsActive,
                     Characters = e.Characters.Select(ch => new DataCharacterDTO()
                     {
                         Id = ch.Id,
