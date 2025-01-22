@@ -7,5 +7,7 @@
         public int Sort { get; set; }
         public int Id_Game { get; set; }
         public GameEntity Game { get; set; }
+        public ICollection<AdventureEntity> Adventures { get; set; }
+        public ICollection<GuideUserEntity> GuidesUser { get; set; }
     }
 }

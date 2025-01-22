@@ -48,7 +48,52 @@ CREATE TABLE GG_Guides (
 )
 GO
 
+CREATE TABLE GG_GuidesUser (
+	Id_Guide INT NOT NULL,
+	Id_User VARCHAR(256) NOT NULL,
+	IsCheck BIT NOT NULL,
+	PRIMARY KEY (Id_Guide, Id_User),
+	FOREIGN KEY (Id_Guide) REFERENCES GG_Guides(Id),
+)
+GO
+
+CREATE TABLE GG_Adventures (
+	Id INT PRIMARY KEY IDENTITY(1,1),
+	Description VARCHAR(800) NOT NULL,
+	IsImportant BIT NOT NULL,
+	Sort INT NOT NULL,
+	Id_Guide INT NOT NULL,
+	FOREIGN KEY (Id_Guide) REFERENCES GG_Guides(Id),
+)
+GO
+
+CREATE TABLE GG_AdventuresUser (
+	Id_Adventure INT NOT NULL,
+	Id_User VARCHAR(256) NOT NULL,
+	IsCheck BIT NOT NULL,
+	PRIMARY KEY (Id_Adventure, Id_User),
+	FOREIGN KEY (Id_Adventure) REFERENCES GG_Adventures(Id),
+)
+GO
+
+CREATE TABLE GG_AdventuresImg (
+	Id INT PRIMARY KEY IDENTITY(1,1),
+	ImgUrl VARCHAR(256) NOT NULL,
+	Sort INT NOT NULL,
+	Id_Adventure INT NOT NULL,
+	FOREIGN KEY (Id_Adventure) REFERENCES GG_Adventures(Id),
+)
+GO
+
 DROP TABLE __EFMigrationsHistory
+GO
+DROP TABLE GG_AdventuresImg
+GO
+DROP TABLE GG_AdventuresUser
+GO
+DROP TABLE GG_Adventures
+GO
+DROP TABLE GG_GuidesUser
 GO
 DROP TABLE GG_Guides
 GO
@@ -282,6 +327,10 @@ SELECT * FROM GG_Characters
 SELECT * FROM GG_Sources
 SELECT * FROM GG_Backgrounds
 SELECT * FROM GG_Guides
+SELECT * FROM GG_GuidesUser
+SELECT * FROM GG_Adventures
+SELECT * FROM GG_AdventuresUser
+SELECT * FROM GG_AdventuresImg
 
 -- --------------------------------------------------------------
 -- --------------------------------------------------------------

@@ -28,38 +28,70 @@ namespace ClassLibrary.GamesGuide.Services
                     .Include(t => t.Source)
                     .Include(t => t.Backgrounds)
                     .Include(t => t.Guides)
+                        .ThenInclude(t => t.GuidesUser)
+                    .Include(t => t.Guides)
+                        .ThenInclude(t => t.Adventures)
+                            .ThenInclude(t => t.AdventuresUser)
+                    .Include(t => t.Guides)
+                        .ThenInclude(t => t.Adventures)
+                            .ThenInclude(t => t.AdventuresImg)
                     .ToListAsync(cancellationToken);
 
-                var gamesDTO = result.Select(e => new DataGameDTO()
+                var gamesDTO = result.Select(ga => new DataGameDTO()
                 {
-                    Id = e.Id,
-                    Name = e.Name,
-                    Description = e.Description,
-                    ImgUrl = e.ImgUrl,
-                    IsActive = e.IsActive,
-                    Characters = e.Characters.Select(ch => new DataCharacterDTO()
+                    Id = ga.Id,
+                    Name = ga.Name,
+                    Description = ga.Description,
+                    ImgUrl = ga.ImgUrl,
+                    IsActive = ga.IsActive,
+                    Characters = ga.Characters.Select(c => new DataCharacterDTO()
                     {
-                        Id = ch.Id,
-                        Name = ch.Name,
-                        Description = ch.Description,
-                        ImgUrl = ch.ImgUrl,
+                        Id = c.Id,
+                        Name = c.Name,
+                        Description = c.Description,
+                        ImgUrl = c.ImgUrl,
                     }).ToList(),
-                    Sources = e.Source.Select(sc => new DataSourceDTO()
+                    Sources = ga.Source.Select(s => new DataSourceDTO()
                     {
-                        Id = sc.Id,
-                        Name = sc.Name,
-                        ImgUrl = sc.ImgUrl,
+                        Id = s.Id,
+                        Name = s.Name,
+                        ImgUrl = s.ImgUrl,
                     }).ToList(),
-                    Backgrounds = e.Backgrounds.Select(bg => new DataBackgroundDTO()
+                    Backgrounds = ga.Backgrounds.Select(b => new DataBackgroundDTO()
                     {
-                        Id = bg.Id,
-                        ImgUrl = bg.ImgUrl,
+                        Id = b.Id,
+                        ImgUrl = b.ImgUrl,
                     }).ToList(),
-                    Guides = e.Guides.Select(gu => new DataGuideDTO()
+                    Guides = ga.Guides.Select(gu => new DataGuideDTO()
                     {
                         Id = gu.Id,
                         Name = gu.Name,
                         Sort = gu.Sort,
+                        GuidesUser = gu.GuidesUser.Select(gu => new DataGuideUserDTO()
+                        {
+                            Id_Guide = gu.Id_Guide,
+                            Id_User = gu.Id_User,
+                            IsCheck = gu.IsCheck,
+                        }).ToList(),
+                        Adventures = gu.Adventures.Select(ad => new DataAdventureDTO()
+                        {
+                            Id = ad.Id,
+                            Description = ad.Description,
+                            IsImportant = ad.IsImportant,
+                            Sort = ad.Sort,
+                            AdventuresUser = ad.AdventuresUser.Select(au => new DataAdventureUserDTO()
+                            {
+                                Id_User = au.Id_User,
+                                Id_Adventure = au.Id_Adventure,
+                                IsCheck = au.IsCheck,
+                            }).ToList(),
+                            AdventuresImg = ad.AdventuresImg.Select(ad => new DataAdventureImgDTO()
+                            {
+                                Id = ad.Id,
+                                ImgUrl = ad.ImgUrl,
+                                Sort = ad.Sort,
+                            }).ToList(),
+                        }).ToList(),
                     }).ToList(),
                 }).ToList();
 
@@ -85,7 +117,5 @@ namespace ClassLibrary.GamesGuide.Services
                 };
             }
         }
-
-
     }
 }
