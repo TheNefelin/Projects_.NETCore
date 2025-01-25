@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\GamesGuide\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ClassLibrary.GamesGuide\ClassLibrary.GamesGuide.csproj" />
   </ItemGroup>
 

@@ -55,7 +55,7 @@ namespace ClassLibrary.GamesGuide.Services
                     {
                         Id = s.Id,
                         Name = s.Name,
-                        ImgUrl = s.ImgUrl,
+                        Url = s.Url,
                     }).ToList(),
                     Backgrounds = ga.Backgrounds.Select(b => new DataBackgroundDTO()
                     {

@@ -46,6 +46,16 @@ app.UseSwagger(options =>
 });
 // -------------------------------------------------------------------
 
+// Cors --------------------------------------------------------------
+app.UseCors(options =>
+{
+    options.AllowAnyHeader();
+    options.AllowAnyMethod();
+    options.AllowCredentials();
+    options.SetIsOriginAllowed(origin => true);
+});
+// -------------------------------------------------------------------
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

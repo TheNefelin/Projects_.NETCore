@@ -45,7 +45,7 @@ namespace ClassLibrary.GamesGuide.Connection
             {
                 t.HasKey(e => e.Id);
                 t.Property(e => e.Name).HasColumnType("VARCHAR(50)");
-                t.Property(e => e.ImgUrl).HasColumnType("VARCHAR(256)");
+                t.Property(e => e.Url).HasColumnType("VARCHAR(256)");
                 t.HasOne(tr => tr.Game)
                     .WithMany(tr => tr.Source)
                     .HasForeignKey(c => c.Id_Game)
