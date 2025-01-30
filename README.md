@@ -5,4 +5,5 @@ Here I have included a list of projects that are deployed from a single API sinc
 ## Project List
 * [SQLServer - GuiaJuegos.sql](https://github.com/TheNefelin/Projects_.NETCore/tree/master/SQLServer/GuiaJuegos.sql)
 * [.NET 7 - ClassLibrary.GamesGuide](https://github.com/TheNefelin/Projects_.NETCore/tree/master/ClassLibrary.GamesGuide)
+* [.NET 7 - ClassLibrary.GamesGuideDapper](https://github.com/TheNefelin/Projects_.NETCore/tree/master/ClassLibrary.GamesGuideDapper)
 * [.NET 7 - WebApi](https://github.com/TheNefelin/Projects_.NETCore/tree/master/WebApi)
