@@ -1,4 +1,4 @@
-﻿namespace ClassLibrary.GamesGuide.DTOs
+﻿namespace ClassLibrary.Common.DTOs
 {
     public class DataCharacterDTO
     {

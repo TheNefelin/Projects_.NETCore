@@ -1,10 +1,11 @@
-﻿namespace ClassLibrary.GamesGuide.DTOs
+﻿namespace ClassLibrary.Common.DTOs
 {
-    public class DataCharacterDTO
+    public class GameDTO
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public string ImgUrl { get; set; } = string.Empty;
+        public bool IsActive { get; set; }
     }
 }

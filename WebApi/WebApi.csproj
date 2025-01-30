@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary.GamesGuideDapper\ClassLibrary.GamesGuideDapper.csproj" />
     <ProjectReference Include="..\ClassLibrary.GamesGuide\ClassLibrary.GamesGuide.csproj" />
   </ItemGroup>
 

@@ -8,12 +8,12 @@ using Microsoft.Extensions.Logging;
 
 namespace ClassLibrary.GamesGuide.Services
 {
-    public class GameService : IGamesService
+    public class GameEFService : IGamesService
     {
-        private readonly ILogger<GameService> _logger;
+        private readonly ILogger<GameEFService> _logger;
         private readonly GamesGuideDbContext _context;
 
-        public GameService(ILogger<GameService> logger, GamesGuideDbContext context)
+        public GameEFService(ILogger<GameEFService> logger, GamesGuideDbContext context)
         {
             _logger = logger;
             _context = context;

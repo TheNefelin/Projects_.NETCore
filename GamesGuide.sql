@@ -1316,6 +1316,169 @@ GO
 SET IDENTITY_INSERT GG_AdventuresImg OFF
 GO
 
+-- Stored Procedure ---------------------------------------------
+-- --------------------------------------------------------------
+
+CREATE PROCEDURE GG_Games_GetAll 
+AS
+BEGIN
+	SET NOCOUNT ON
+
+	SELECT
+		Id,
+		Name,
+		Description,
+		ImgUrl,
+		IsActive
+	FROM GG_Games
+
+END
+GO
+
+CREATE PROCEDURE GG_Characters_GetAll 
+AS
+BEGIN
+	SET NOCOUNT ON
+
+	SELECT
+		Id,
+		Name,
+		Description,
+		ImgUrl,
+		Id_Game
+	FROM GG_Characters
+
+END
+GO
+
+CREATE PROCEDURE GG_Sources_GetAll 
+AS
+BEGIN
+	SET NOCOUNT ON
+
+	SELECT
+		Id,
+		Name,
+		Url,
+		Id_Game
+	FROM GG_Sources
+
+END
+GO
+
+CREATE PROCEDURE GG_Backgrounds_GetAll 
+AS
+BEGIN
+	SET NOCOUNT ON
+
+	SELECT
+		Id,
+		ImgUrl,
+		Id_Game
+	FROM GG_Backgrounds
+
+END
+GO
+
+CREATE PROCEDURE GG_Guides_GetAll 
+AS
+BEGIN
+	SET NOCOUNT ON
+
+	SELECT
+		Id,
+		Name,
+		Sort,
+		Id_Game
+	FROM GG_Guides
+
+END
+GO
+
+CREATE PROCEDURE GG_GuidesUser_GetAll
+	@Id_User VARCHAR(256)
+AS
+BEGIN
+	SET NOCOUNT ON
+
+	SELECT
+		Id_Guide,
+		Id_User,
+		IsCheck
+	FROM GG_GuidesUser
+	WHERE
+		Id_User = @Id_User
+
+END
+GO
+
+CREATE PROCEDURE GG_Adventures_GetAll 
+AS
+BEGIN
+	SET NOCOUNT ON
+
+	SELECT
+		Id,
+		Description,
+		IsImportant,
+		Sort,
+		Id_Guide
+	FROM GG_Adventures
+
+END
+GO
+
+CREATE PROCEDURE GG_AdventuresUser_GetAll
+	@Id_User VARCHAR(256)
+AS
+BEGIN
+	SET NOCOUNT ON
+
+	SELECT
+		Id_Adventure,
+		Id_User,
+		IsCheck
+	FROM GG_AdventuresUser
+	WHERE
+		Id_User = @Id_User
+
+END
+GO
+
+CREATE PROCEDURE GG_AdventuresImg_GetAll
+AS
+BEGIN
+	SET NOCOUNT ON
+
+	SELECT
+		Id,
+		ImgUrl,
+		Sort,
+		Id_Adventure
+	FROM GG_AdventuresImg
+
+END
+GO
+
+DROP PROCEDURE GG_Games_GetAll
+GO
+DROP PROCEDURE GG_Characters_GetAll
+GO
+DROP PROCEDURE GG_Sources_GetAll
+GO
+DROP PROCEDURE GG_Backgrounds_GetAll
+GO
+DROP PROCEDURE GG_Guides_GetAll
+GO
+DROP PROCEDURE GG_GuidesUser_GetAll
+GO
+DROP PROCEDURE GG_Adventures_GetAll
+GO
+DROP PROCEDURE GG_AdventuresUser_GetAll
+GO
+DROP PROCEDURE GG_AdventuresImg_GetAll
+GO
+
 -- Query --------------------------------------------------------
 -- --------------------------------------------------------------
 
@@ -1328,6 +1491,16 @@ SELECT * FROM GG_GuidesUser
 SELECT * FROM GG_Adventures
 SELECT * FROM GG_AdventuresUser
 SELECT * FROM GG_AdventuresImg
+
+EXECUTE GG_Games_GetAll
+EXECUTE GG_Characters_GetAll
+EXECUTE GG_Sources_GetAll
+EXECUTE GG_Backgrounds_GetAll
+EXECUTE GG_Guides_GetAll
+EXECUTE GG_GuidesUser_GetAll
+EXECUTE GG_Adventures_GetAll
+EXECUTE GG_AdventuresUser_GetAll
+EXECUTE GG_AdventuresImg_GetAll
 
 -- --------------------------------------------------------------
 -- --------------------------------------------------------------
