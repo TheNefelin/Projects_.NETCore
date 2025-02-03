@@ -16,19 +16,15 @@ namespace ClassLibrary.GamesGuideDapper.Services
 
         public async Task<IEnumerable<SourceDTO>> GetAllAsync(CancellationToken cancellationToken)
         {
+            var query = "SELECT Id, Name, Url, Id_Game FROM GG_Sources";
             try
             {
-                var result = await _dapper.QueryAsync<SourceDTO>(new CommandDefinition(
-                    $"GG_Sources_GetAll",
-                    commandType: CommandType.StoredProcedure,
-                    transaction: default,
-                    cancellationToken: cancellationToken));
-
+                var result = await _dapper.QueryAsync<SourceDTO>(query);
                 return result;
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception("Error SourceDapperService.", ex);
             }
         }
     }

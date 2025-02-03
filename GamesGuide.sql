@@ -3,6 +3,21 @@ USE db_testing
 -- Tables -------------------------------------------------------
 -- --------------------------------------------------------------
 
+CREATE TABLE Mae_Config (
+	Id INT PRIMARY KEY IDENTITY(1,1),
+	ApiKey varchar(256) NOT NULL
+)
+GO
+
+CREATE TABLE GG_Users (
+	Id VARCHAR(256) PRIMARY KEY,
+	Email VARCHAR(100) UNIQUE NOT NULL,
+	GoogleSUB VARCHAR(256),
+	GoogleJTI VARCHAR(256),
+	SqlToken VARCHAR(256)
+)
+GO
+
 CREATE TABLE GG_Games (
 	Id INT PRIMARY KEY IDENTITY(1,1),
 	Name VARCHAR(50) NOT NULL,
@@ -87,6 +102,8 @@ GO
 
 DROP TABLE __EFMigrationsHistory
 GO
+DROP TABLE Mae_Config
+GO
 DROP TABLE GG_AdventuresImg
 GO
 DROP TABLE GG_AdventuresUser
@@ -105,9 +122,22 @@ DROP TABLE GG_Characters
 GO
 DROP TABLE GG_Games
 GO
+DROP TABLE GG_Users
+GO
+DROP TABLE Mae_Config
+GO
 
 -- Data ---------------------------------------------------------
 -- --------------------------------------------------------------
+
+SET IDENTITY_INSERT Mae_Config ON
+GO
+INSERT INTO Mae_Config
+	(Id, ApiKey)
+VALUES
+	(1, 'ApiKey-Secret-777')
+SET IDENTITY_INSERT Mae_Config OFF
+GO
 
 SET IDENTITY_INSERT GG_Games ON
 GO
@@ -1319,188 +1349,223 @@ GO
 -- Stored Procedure ---------------------------------------------
 -- --------------------------------------------------------------
 
-CREATE PROCEDURE GG_Games_GetAll 
+CREATE PROCEDURE GG_Login
+    @Email VARCHAR(100),
+    @Sub VARCHAR(256),
+    @Jti VARCHAR(256)
 AS
 BEGIN
-	SET NOCOUNT ON
+    SET NOCOUNT ON;
 
-	SELECT
-		Id,
-		Name,
-		Description,
-		ImgUrl,
-		IsActive
-	FROM GG_Games
+    -- Validar parámetros de entrada
+    IF @Email IS NULL OR @Sub IS NULL OR @Jti IS NULL
+		BEGIN
+			SELECT 
+				0 AS IsSucces, 
+				400 AS StatusCode, 
+				'Parámetros Obligatorios' AS Msge, 
+				NULL AS Id, 
+				NULL AS SqlToken
+			RETURN
+		END
+
+	BEGIN TRANSACTION
+
+	BEGIN TRY
+		IF EXISTS (SELECT Id FROM GG_Users WHERE Email = @Email)
+			BEGIN
+				IF NOT EXISTS (SELECT Id FROM GG_Users WHERE Email = @Email AND GoogleSUB = @Sub)
+				BEGIN
+					SELECT 
+						0 AS IsSucces, 
+						401 AS StatusCode, 
+						'Usuario No Autorizado' AS Msge, 
+						NULL AS Id, 
+						NULL AS SqlToken
+					RETURN
+				END
+
+				UPDATE GG_Users SET 
+					GoogleJTI = @Jti,
+					SqlToken = NEWID()
+				WHERE Email = @Email
+			END
+		ELSE
+			BEGIN
+				INSERT INTO GG_Users 
+					(Id, Email, GoogleSUB, GoogleJti, SqlToken)
+				VALUES 
+					(NEWID(), @Email, @Sub, @Jti, NEWID())
+			END
+
+		SELECT 
+			1 AS IsSucces, 
+			200 AS StatusCode, 
+			'Ok' AS Msge, 
+			Id, 
+			SqlToken 
+		FROM GG_Users WHERE Email = @Email	
+
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION
+
+	    SELECT 
+			0 AS IsSucces, 
+			ERROR_STATE() AS StatusCode, 
+			ERROR_MESSAGE() AS Msge, 
+			NULL AS Id, 
+			NULL AS SqlToken
+	END CATCH
 
 END
 GO
 
-CREATE PROCEDURE GG_Characters_GetAll 
+CREATE PROCEDURE GG_GuidesUser_Set
+    @Id_Guide INT,
+    @Id_User VARCHAR(256),
+    @IsCheck BIT
 AS
 BEGIN
-	SET NOCOUNT ON
+    SET NOCOUNT ON;
 
-	SELECT
-		Id,
-		Name,
-		Description,
-		ImgUrl,
-		Id_Game
-	FROM GG_Characters
+    -- Validar parámetros de entrada
+    IF @Id_Guide IS NULL OR @Id_User IS NULL OR @IsCheck IS NULL
+    BEGIN
+        SELECT 0 AS IsSucces, 400 AS StatusCode, 'Parámetros Obligatorios' AS Msge;
+        RETURN;
+    END;
 
-END
+    -- Verificar si el usuario existe
+    IF NOT EXISTS (SELECT Id FROM GG_Users WHERE Id = @Id_User)
+    BEGIN
+        SELECT 0 AS IsSucces, 404 AS StatusCode, 'No se Encontró el Usuario' AS Msge;
+        RETURN;
+    END;
+
+	-- Verificar si la guia existe
+    IF NOT EXISTS (SELECT Id FROM GG_Guides WHERE Id = @Id_Guide)
+    BEGIN
+        SELECT 0 AS IsSucces, 404 AS StatusCode, 'No se Encontró la Guia' AS Msge;
+        RETURN;
+    END;
+
+    BEGIN TRANSACTION;
+
+    BEGIN TRY
+        -- Usar MERGE para manejar la inserción o actualización
+        MERGE GG_GuidesUser AS target
+        USING (SELECT @Id_Guide AS Id_Guide, @Id_User AS Id_User) AS source
+        ON target.Id_Guide = source.Id_Guide AND target.Id_User = source.Id_User
+        WHEN MATCHED THEN
+            UPDATE SET IsCheck = @IsCheck
+        WHEN NOT MATCHED THEN
+            INSERT (Id_Guide, Id_User, IsCheck)
+            VALUES (@Id_Guide, @Id_User, @IsCheck);
+
+        -- Confirmar la transacción
+        COMMIT TRANSACTION;
+
+        -- Devolver éxito
+        SELECT 1 AS IsSucces, 200 AS StatusCode, 'Ok' AS Msge;
+    END TRY
+    BEGIN CATCH
+        -- Revertir la transacción en caso de error
+        ROLLBACK TRANSACTION;
+
+        -- Devolver error
+        SELECT 0 AS IsSucces, ERROR_STATE() AS StatusCode, ERROR_MESSAGE() AS Msge;
+    END CATCH;
+END;
 GO
 
-CREATE PROCEDURE GG_Sources_GetAll 
+CREATE PROCEDURE GG_AdventuresUser_Set
+    @Id_Adventure INT,
+    @Id_User VARCHAR(256),
+    @IsCheck BIT
 AS
 BEGIN
-	SET NOCOUNT ON
+    SET NOCOUNT ON;
 
-	SELECT
-		Id,
-		Name,
-		Url,
-		Id_Game
-	FROM GG_Sources
+    -- Validar parámetros de entrada
+    IF @Id_Adventure IS NULL OR @Id_User IS NULL OR @IsCheck IS NULL
+    BEGIN
+        SELECT 0 AS IsSucces, 400 AS StatusCode, 'Parámetros Obligatorios' AS Msge;
+        RETURN;
+    END;
 
-END
+    -- Verificar si el usuario existe
+    IF NOT EXISTS (SELECT Id FROM GG_Users WHERE Id = @Id_User)
+    BEGIN
+        SELECT 0 AS IsSucces, 404 AS StatusCode, 'No se Encontró el Usuario' AS Msge;
+        RETURN;
+    END;
+
+	-- Verificar si la avnetura existe
+    IF NOT EXISTS (SELECT Id FROM GG_Adventures WHERE Id = @Id_Adventure)
+    BEGIN
+        SELECT 0 AS IsSucces, 404 AS StatusCode, 'No se Encontró la Aventura' AS Msge;
+        RETURN;
+    END;
+
+    BEGIN TRANSACTION;
+
+    BEGIN TRY
+        -- Usar MERGE para manejar la inserción o actualización
+        MERGE GG_AdventuresUser AS target
+        USING (SELECT @Id_Adventure AS Id_Adventure, @Id_User AS Id_User) AS source
+        ON target.Id_Adventure = source.Id_Adventure AND target.Id_User = source.Id_User
+        WHEN MATCHED THEN
+            UPDATE SET IsCheck = @IsCheck
+        WHEN NOT MATCHED THEN
+            INSERT (Id_Adventure, Id_User, IsCheck)
+            VALUES (@Id_Adventure, @Id_User, @IsCheck);
+
+        -- Confirmar la transacción
+        COMMIT TRANSACTION;
+
+        -- Devolver éxito
+        SELECT 1 AS IsSucces, 200 AS StatusCode, 'Ok' AS Msge;
+    END TRY
+    BEGIN CATCH
+        -- Revertir la transacción en caso de error
+        ROLLBACK TRANSACTION;
+
+        -- Devolver error
+        SELECT 0 AS IsSucces, ERROR_STATE() AS StatusCode, ERROR_MESSAGE() AS Msge;
+    END CATCH;
+END;
 GO
 
-CREATE PROCEDURE GG_Backgrounds_GetAll 
-AS
-BEGIN
-	SET NOCOUNT ON
-
-	SELECT
-		Id,
-		ImgUrl,
-		Id_Game
-	FROM GG_Backgrounds
-
-END
+DROP PROCEDURE GG_Login
 GO
-
-CREATE PROCEDURE GG_Guides_GetAll 
-AS
-BEGIN
-	SET NOCOUNT ON
-
-	SELECT
-		Id,
-		Name,
-		Sort,
-		Id_Game
-	FROM GG_Guides
-
-END
+DROP PROCEDURE GG_GuidesUser_Set
 GO
-
-CREATE PROCEDURE GG_GuidesUser_GetAll
-	@Id_User VARCHAR(256)
-AS
-BEGIN
-	SET NOCOUNT ON
-
-	SELECT
-		Id_Guide,
-		Id_User,
-		IsCheck
-	FROM GG_GuidesUser
-	WHERE
-		Id_User = @Id_User
-
-END
-GO
-
-CREATE PROCEDURE GG_Adventures_GetAll 
-AS
-BEGIN
-	SET NOCOUNT ON
-
-	SELECT
-		Id,
-		Description,
-		IsImportant,
-		Sort,
-		Id_Guide
-	FROM GG_Adventures
-
-END
-GO
-
-CREATE PROCEDURE GG_AdventuresUser_GetAll
-	@Id_User VARCHAR(256)
-AS
-BEGIN
-	SET NOCOUNT ON
-
-	SELECT
-		Id_Adventure,
-		Id_User,
-		IsCheck
-	FROM GG_AdventuresUser
-	WHERE
-		Id_User = @Id_User
-
-END
-GO
-
-CREATE PROCEDURE GG_AdventuresImg_GetAll
-AS
-BEGIN
-	SET NOCOUNT ON
-
-	SELECT
-		Id,
-		ImgUrl,
-		Sort,
-		Id_Adventure
-	FROM GG_AdventuresImg
-
-END
-GO
-
-DROP PROCEDURE GG_Games_GetAll
-GO
-DROP PROCEDURE GG_Characters_GetAll
-GO
-DROP PROCEDURE GG_Sources_GetAll
-GO
-DROP PROCEDURE GG_Backgrounds_GetAll
-GO
-DROP PROCEDURE GG_Guides_GetAll
-GO
-DROP PROCEDURE GG_GuidesUser_GetAll
-GO
-DROP PROCEDURE GG_Adventures_GetAll
-GO
-DROP PROCEDURE GG_AdventuresUser_GetAll
-GO
-DROP PROCEDURE GG_AdventuresImg_GetAll
+DROP PROCEDURE GG_AdventuresUser_Set
 GO
 
 -- Query --------------------------------------------------------
 -- --------------------------------------------------------------
+
+SELECT * FROM Mae_Config
+SELECT * FROM GG_Users
 
 SELECT * FROM GG_Games
 SELECT * FROM GG_Characters
 SELECT * FROM GG_Sources
 SELECT * FROM GG_Backgrounds
 SELECT * FROM GG_Guides
-SELECT * FROM GG_GuidesUser
 SELECT * FROM GG_Adventures
-SELECT * FROM GG_AdventuresUser
 SELECT * FROM GG_AdventuresImg
+SELECT * FROM GG_GuidesUser
+SELECT * FROM GG_AdventuresUser
 
-EXECUTE GG_Games_GetAll
-EXECUTE GG_Characters_GetAll
-EXECUTE GG_Sources_GetAll
-EXECUTE GG_Backgrounds_GetAll
-EXECUTE GG_Guides_GetAll
-EXECUTE GG_GuidesUser_GetAll
-EXECUTE GG_Adventures_GetAll
-EXECUTE GG_AdventuresUser_GetAll
-EXECUTE GG_AdventuresImg_GetAll
+EXECUTE GG_Login 'b@b', '456', '789'
+EXECUTE GG_GuidesUser_Set 10, '123', 0
+EXECUTE GG_AdventuresUser_Set 10, '123', 1
 
 -- --------------------------------------------------------------
 -- --------------------------------------------------------------
+
+

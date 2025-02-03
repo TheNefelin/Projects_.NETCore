@@ -1,12 +1,11 @@
 ﻿using ClassLibrary.Common;
 using ClassLibrary.Common.DTOs;
 using ClassLibrary.GamesGuideDapper.Interfaces;
-using Dapper;
 using System.Data;
 
 namespace ClassLibrary.GamesGuideDapper.Services
 {
-    public class PublicDapperService
+    public class PublicDapperService : IPublicDapperService
     {
         private readonly IServiceCRUD<GameDTO> _game;
         private readonly IServiceCRUD<CharacterDTO> _character;
@@ -145,7 +144,7 @@ namespace ClassLibrary.GamesGuideDapper.Services
                 return new ResponseApi<IEnumerable<DataGameDTO>>
                 {
                     IsSucces = false,
-                    StatusCode = 200,
+                    StatusCode = 500,
                     Message = ex.Message,
                 };
             }

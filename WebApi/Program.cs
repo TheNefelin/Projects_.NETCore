@@ -7,6 +7,7 @@ using ClassLibrary.GamesGuideDapper.Services;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
+using WebApi.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,9 +35,15 @@ builder.Services.AddTransient<IServiceCRUD<BackgroundDTO>, BackgroundDapperServi
 builder.Services.AddTransient<IServiceCRUD<GuideDTO>, GuideDapperService>();
 builder.Services.AddTransient<IServiceCRUD<AdventureDTO>, AdventureDapperService>();
 builder.Services.AddTransient<IServiceCRUD<AdventureImgDTO>, AdventureImgDapperService>();
+
+builder.Services.AddTransient<IPublicDapperService, PublicDapperService>();
+
 builder.Services.AddTransient<IServiceUserCRUD<GuideUserDTO>, GuideUserDapperService>();
 builder.Services.AddTransient<IServiceUserCRUD<AdventureUserDTO>, AdventureUserDapperService>();
-builder.Services.AddTransient<PublicDapperService>();
+
+builder.Services.AddScoped<AuthGoogleService>();
+builder.Services.AddScoped<IApiKeyService, ApiKeyService>();
+builder.Services.AddScoped<AuthApiKeyFilter>();
 // -------------------------------------------------------------------
 
 builder.Services.AddControllers();

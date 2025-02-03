@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
     [Route("api/img")]
     [ApiController]
+    [ServiceFilter(typeof(AuthApiKeyFilter))]
     public class ImgController : ControllerBase
     {
         private readonly IWebHostEnvironment _webHostEnvironment;

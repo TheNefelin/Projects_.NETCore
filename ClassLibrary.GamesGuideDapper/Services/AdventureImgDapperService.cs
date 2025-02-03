@@ -16,19 +16,15 @@ namespace ClassLibrary.GamesGuideDapper.Services
 
         public async Task<IEnumerable<AdventureImgDTO>> GetAllAsync(CancellationToken cancellationToken)
         {
+            var query = "SELECT Id, ImgUrl, Sort, Id_Adventure FROM GG_AdventuresImg";
             try
             {
-                var result = await _dapper.QueryAsync<AdventureImgDTO>(new CommandDefinition(
-                    $"GG_AdventuresImg_GetAll",
-                    commandType: CommandType.StoredProcedure,
-                    transaction: default,
-                    cancellationToken: cancellationToken));
-
+                var result = await _dapper.QueryAsync<AdventureImgDTO>(query);
                 return result;
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception("Error AdventureImgDapperService.", ex);
             }
         }
     }
