@@ -241,7 +241,11 @@ VALUES
 	(5,'background_ds2_01_1280x720.webp',3),
 	(6,'background_ds2_02_1280x720.webp',3),
 	(7,'background_ffix_01_1280x720.webp',4),
-	(8,'background_ffix_02_1280x720.webp',4)
+	(8,'background_ffix_02_1280x720.webp',4),
+	(9,'map_ds2_01.webp',3),
+	(10,'map_ds2_02.webp',3),
+	(11,'map_ds2_03.webp',3),
+	(12,'map_ds2_04.webp',3)
 GO
 SET IDENTITY_INSERT GG_Backgrounds OFF
 GO
@@ -1330,21 +1334,23 @@ VALUES
 	(329,'item_cc_time_egg_1536x1080.webp',3,237),
 	(330,'final_cc_10_1536x1080.webp',4,237),
 	(331,'adventure_cc_57_01_1536x1080.webp',1,241),
-
-	(332,'com_arma_bd_01.webp',1,269),
-	(333,'com_arma_bd_02.webp',1,284),
-	(334,'com_arma_mjolnir.webp',1,294),
-	(335,'com_arma_mumeito_01.webp',1,307),
-	(336,'com_arma_mumeito_02.webp',1,320),
-	(337,'com_arma_escudo.webp',1,336),
-	(338,'com_set_01_a.webp',1,341),
-	(339,'com_set_01_b.webp',2,341),
-	(340,'com_set_01_c.webp',3,341),
-	(341,'com_set_02_a.webp',1,346),
-	(342,'com_set_02_b.webp',2,346)
+	(332,'weapon_com_sword_01.webp',1,269),
+	(333,'weapon_com_sword_02.webp',1,284),
+	(334,'weapon_com_hammer.webp',1,294),
+	(335,'weapon_com_katana_01.webp',1,307),
+	(336,'weapon_com_katana_02.webp',1,320),
+	(337,'weapon_com_shield.webp',1,336),
+	(338,'set_com_01_a.webp',1,341),
+	(339,'set_com_01_b.webp',2,341),
+	(340,'set_com_01_c.webp',3,341),
+	(341,'set_com_02_a.webp',1,346),
+	(342,'set_com_02_b.webp',2,346)
 GO
 SET IDENTITY_INSERT GG_AdventuresImg OFF
 GO
+
+UPDATE GG_AdventuresImg SET ImgUrl = 'set_com_02_b.webp' WHERE id = 342
+SELECT * FROM GG_AdventuresImg WHERE id >= 332
 
 -- Stored Procedure ---------------------------------------------
 -- --------------------------------------------------------------
@@ -1562,7 +1568,7 @@ SELECT * FROM GG_GuidesUser
 SELECT * FROM GG_AdventuresUser
 
 EXECUTE GG_Login 'b@b', '456', '789'
-EXECUTE GG_GuidesUser_Set 10, '123', 0
+EXECUTE GG_GuidesUser_Set 1, '2881E494-D76B-4D37-B4FF-15D4257E09EB', 
 EXECUTE GG_AdventuresUser_Set 10, '123', 1
 
 -- --------------------------------------------------------------

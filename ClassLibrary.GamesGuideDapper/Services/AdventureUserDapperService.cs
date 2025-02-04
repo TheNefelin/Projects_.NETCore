@@ -37,7 +37,7 @@ namespace ClassLibrary.GamesGuideDapper.Services
             try
             {
                 var result = await _dapper.QueryFirstOrDefaultAsync<ResponseSql>(new CommandDefinition(
-                    $"GG_GuidesUser_Set",
+                    $"GG_AdventuresUser_Set",
                     new { guideUser.Id_Adventure, guideUser.Id_User, guideUser.IsCheck },
                     commandType: CommandType.StoredProcedure,
                     transaction: default,
@@ -52,7 +52,7 @@ namespace ClassLibrary.GamesGuideDapper.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("Error GuideUserDapperService.", ex);
+                throw new Exception("Error AdventureUserDapperService.", ex);
             }
         }
     }

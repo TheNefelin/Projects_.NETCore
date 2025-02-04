@@ -19,14 +19,16 @@ namespace WebApi.Controllers
         public readonly IServiceUserCRUD<AdventureUserDTO> _adventureUser;
 
         public GameGuideController(
-            ILogger<GameGuideController> logger, 
+            ILogger<GameGuideController> logger,
             IPublicService publicService,
             IServiceUserCRUD<GuideUserDTO> guideUser,
+            IServiceUserCRUD<AdventureUserDTO> adventureUser,
             IPublicDapperService dapper)
         {
             _logger = logger;
             _publicService = publicService;
             _guideUser = guideUser;
+            _adventureUser = adventureUser;
             _dapper = dapper;
         }
 
@@ -39,11 +41,11 @@ namespace WebApi.Controllers
             return StatusCode(result.StatusCode, result);
         }
 
-        [HttpGet("dapper")]
-        public async Task<ActionResult<ResponseApi<IEnumerable<DataGameDTO>>>> GetAllDapper(CancellationToken cancellationToken)
+        [HttpGet("dapper/{iduser?}")]
+        public async Task<ActionResult<ResponseApi<IEnumerable<DataGameDTO>>>> GetAllDapper(string? iduser, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Received request to fetch all games.");
-            var result = await _dapper.GetAllAsync("", cancellationToken);
+            var result = await _dapper.GetAllAsync(iduser, cancellationToken);
 
             return StatusCode(result.StatusCode, result);
         }

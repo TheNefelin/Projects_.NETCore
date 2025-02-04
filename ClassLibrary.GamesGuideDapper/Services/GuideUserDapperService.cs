@@ -36,7 +36,7 @@ namespace ClassLibrary.GamesGuideDapper.Services
         {
             try
             {
-                var result = await _dapper.QueryFirstOrDefaultAsync<ResponseSql>(new CommandDefinition(
+                var result = await _dapper.QueryFirstAsync<ResponseSql>(new CommandDefinition(
                     $"GG_GuidesUser_Set",
                     new { guideUser.Id_Guide, guideUser.Id_User, guideUser.IsCheck },
                     commandType: CommandType.StoredProcedure,

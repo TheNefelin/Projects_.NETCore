@@ -42,6 +42,9 @@ namespace ClassLibrary.GamesGuideDapper.Services
 
         public async Task<ResponseApi<IEnumerable<DataGameDTO>>> GetAllAsync(string Id_User, CancellationToken cancellationToken)
         {
+            if (string.IsNullOrWhiteSpace(Id_User))
+                Id_User = string.Empty;
+
             try
             {
                 var taskGame = _game.GetAllAsync(cancellationToken);

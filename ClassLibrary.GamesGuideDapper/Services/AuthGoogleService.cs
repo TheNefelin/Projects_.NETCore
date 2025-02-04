@@ -14,18 +14,26 @@ namespace ClassLibrary.GamesGuideDapper.Services
             _connection = connection;
         }
 
-        public async Task<ResponseLoggedGoogle> LoginGoogleAsync(LoginGoogleDTO login, CancellationToken cancellationToken)
+        public async Task<ResponseApi<LoggedGoogleTokenDTO>> LoginGoogleAsync(LoginGoogleDTO login, CancellationToken cancellationToken)
         {
             try
             {
-                var result = await _connection.QueryFirstAsync<ResponseLoggedGoogle>(new CommandDefinition(
+                var result = await _connection.QueryFirstAsync<LoggedGoogleDTO>(new CommandDefinition(
                     $"GG_Login",
                     new { login.Email, login.Sub, login.Jti },
                     commandType: CommandType.StoredProcedure,
                     transaction: default,
                     cancellationToken: cancellationToken));
 
-                return result;
+                return new ResponseApi<LoggedGoogleTokenDTO> { 
+                    IsSucces =  result.IsSucces,
+                    StatusCode = result.StatusCode,
+                    Message = result.Msge,
+                    Data = new LoggedGoogleTokenDTO { 
+                        Id = result.Id, 
+                        SqlToken = result.SqlToken 
+                    }
+                };
             }
             catch (Exception ex)
             {

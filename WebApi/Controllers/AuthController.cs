@@ -19,7 +19,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("google")]
-        public async Task<ActionResult<ResponseLoggedGoogle>> GoogleLoginAsync(LoginGoogleDTO login, CancellationToken cancellationToken)
+        public async Task<ActionResult<ResponseApi<LoggedGoogleTokenDTO>>> GoogleLoginAsync(LoginGoogleDTO login, CancellationToken cancellationToken)
         {
             var result = await _authService.LoginGoogleAsync(login, cancellationToken);
             return StatusCode(result.StatusCode, result);

@@ -1,6 +1,6 @@
-﻿namespace ClassLibrary.Common
+﻿namespace ClassLibrary.Common.DTOs
 {
-    public class ResponseLoggedGoogle
+    public class LoggedGoogleDTO
     {
         public required bool IsSucces { get; set; }
         public required int StatusCode { get; set; }
