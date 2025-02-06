@@ -48,5 +48,22 @@ namespace WebApi.Controllers
 
             return BadRequest(new { Msge = "El Archivo No Existe" });
         }
+
+        [HttpGet]
+        [Route("portfolio")]
+        public IActionResult GetPortfolioImg(string fileName)
+        {
+            string path = Path.Combine(_webHostEnvironment.WebRootPath, "Portfolio");
+            var filePath = Path.Combine(path, fileName);
+
+            if (System.IO.File.Exists(filePath))
+            {
+                byte[] b = System.IO.File.ReadAllBytes(filePath);
+
+                return File(b, "image/webp");
+            }
+
+            return BadRequest(new { Msge = "El Archivo No Existe" });
+        }
     }
 }

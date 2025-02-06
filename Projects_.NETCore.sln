@@ -7,7 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlServer", "SqlServer", "{5B3453C3-2210-4778-BEB6-93427EE4F104}"
 	ProjectSection(SolutionItems) = preProject
-		GamesGuide.sql = GamesGuide.sql
+		SqlServer_Common.sql = SqlServer_Common.sql
+		SqlServer_Porfolio.sql = SqlServer_Porfolio.sql
+		SqlServer_GamesGuide.sql = SqlServer_GamesGuide.sql
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary.GamesGuide", "ClassLibrary.GamesGuide\ClassLibrary.GamesGuide.csproj", "{26538605-4278-4A2F-B7C1-003481609A1A}"
@@ -15,6 +17,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary.Common", "ClassLibrary.Common\ClassLibrary.Common.csproj", "{8D874D94-06A8-4927-B6F6-318DB5696293}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary.GamesGuideDapper", "ClassLibrary.GamesGuideDapper\ClassLibrary.GamesGuideDapper.csproj", "{F41E2017-A1DA-4ADE-9544-C0B22A394696}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary.PortfolioDapper", "ClassLibrary.PortfolioDapper\ClassLibrary.PortfolioDapper.csproj", "{192ADC00-2168-4589-9488-033AC221B787}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +42,10 @@ Global
 		{F41E2017-A1DA-4ADE-9544-C0B22A394696}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F41E2017-A1DA-4ADE-9544-C0B22A394696}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F41E2017-A1DA-4ADE-9544-C0B22A394696}.Release|Any CPU.Build.0 = Release|Any CPU
+		{192ADC00-2168-4589-9488-033AC221B787}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{192ADC00-2168-4589-9488-033AC221B787}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{192ADC00-2168-4589-9488-033AC221B787}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{192ADC00-2168-4589-9488-033AC221B787}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,12 +3,6 @@ USE db_testing
 -- Tables -------------------------------------------------------
 -- --------------------------------------------------------------
 
-CREATE TABLE Mae_Config (
-	Id INT PRIMARY KEY IDENTITY(1,1),
-	ApiKey varchar(256) NOT NULL
-)
-GO
-
 CREATE TABLE GG_Users (
 	Id VARCHAR(256) PRIMARY KEY,
 	Email VARCHAR(100) UNIQUE NOT NULL,
@@ -124,20 +118,9 @@ DROP TABLE GG_Games
 GO
 DROP TABLE GG_Users
 GO
-DROP TABLE Mae_Config
-GO
 
 -- Data ---------------------------------------------------------
 -- --------------------------------------------------------------
-
-SET IDENTITY_INSERT Mae_Config ON
-GO
-INSERT INTO Mae_Config
-	(Id, ApiKey)
-VALUES
-	(1, 'ApiKey-Secret-777')
-SET IDENTITY_INSERT Mae_Config OFF
-GO
 
 SET IDENTITY_INSERT GG_Games ON
 GO
@@ -1349,9 +1332,6 @@ GO
 SET IDENTITY_INSERT GG_AdventuresImg OFF
 GO
 
-UPDATE GG_AdventuresImg SET ImgUrl = 'set_com_02_b.webp' WHERE id = 342
-SELECT * FROM GG_AdventuresImg WHERE id >= 332
-
 -- Stored Procedure ---------------------------------------------
 -- --------------------------------------------------------------
 
@@ -1571,7 +1551,6 @@ EXECUTE GG_Login 'b@b', '456', '789'
 EXECUTE GG_GuidesUser_Set 1, '2881E494-D76B-4D37-B4FF-15D4257E09EB', 
 EXECUTE GG_AdventuresUser_Set 10, '123', 1
 
+
 -- --------------------------------------------------------------
 -- --------------------------------------------------------------
-
-

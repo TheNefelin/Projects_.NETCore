@@ -4,6 +4,7 @@ using ClassLibrary.GamesGuide.Interfaces;
 using ClassLibrary.GamesGuide.Services;
 using ClassLibrary.GamesGuideDapper.Interfaces;
 using ClassLibrary.GamesGuideDapper.Services;
+using ClassLibrary.PortfolioDapper.Services;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
@@ -19,7 +20,11 @@ builder.Services.AddDbContext<GamesGuideDbContext>(options => // EntityFramework
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerWeb"));
 });
 
-builder.Services.AddTransient<IDbConnection>(options => // Dapper
+builder.Services.AddTransient<IDbConnection>(options => // Generic Connection
+    new SqlConnection(builder.Configuration.GetConnectionString("SqlServerWeb"))
+);
+
+builder.Services.AddScoped<SqlConnection>(options => // SqlServer Connection
     new SqlConnection(builder.Configuration.GetConnectionString("SqlServerWeb"))
 );
 // -------------------------------------------------------------------
@@ -35,11 +40,11 @@ builder.Services.AddTransient<IServiceCRUD<BackgroundDTO>, BackgroundDapperServi
 builder.Services.AddTransient<IServiceCRUD<GuideDTO>, GuideDapperService>();
 builder.Services.AddTransient<IServiceCRUD<AdventureDTO>, AdventureDapperService>();
 builder.Services.AddTransient<IServiceCRUD<AdventureImgDTO>, AdventureImgDapperService>();
-
 builder.Services.AddTransient<IPublicDapperService, PublicDapperService>();
-
 builder.Services.AddTransient<IServiceUserCRUD<GuideUserDTO>, GuideUserDapperService>();
 builder.Services.AddTransient<IServiceUserCRUD<AdventureUserDTO>, AdventureUserDapperService>();
+
+builder.Services.AddTransient<PortfolioService>();
 
 builder.Services.AddScoped<AuthGoogleService>();
 builder.Services.AddScoped<IApiKeyService, ApiKeyService>();
