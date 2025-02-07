@@ -5,7 +5,9 @@
 CREATE TABLE PF_Projects (
 	Id INT PRIMARY KEY IDENTITY(1,1),
 	Name VARCHAR(50) NOT NULL,
-	ImgUrl VARCHAR(100) NOT NULL
+	ImgUrl VARCHAR(100) NOT NULL,
+	RepoUrl VARCHAR(256),
+	AppUrl VARCHAR(256)
 )
 GO
 
@@ -81,14 +83,19 @@ GO
 SET IDENTITY_INSERT PF_Projects ON
 GO
 INSERT INTO PF_Projects
-	(Id, Name, ImgUrl)
+	(Id, Name, ImgUrl, RepoUrl, AppUrl)
 VALUES
-	(1, 'Projecto1', 'project_01_1330x875.webp'),
-	(2, 'Projecto2', 'project_01_1330x875.webp'),
-	(3, 'Projecto3', 'project_01_1330x875.webp'),
-	(4, 'Projecto4', 'project_01_1330x875.webp'),
-	(5, 'Projecto5', 'project_01_1330x875.webp'),
-	(5, 'Projecto5', 'project_01_1330x875.webp')
+	(1, 'Transbank POS Integration', 'project_pos_863x568.webp', 'https://github.com/TheNefelin/Transbank_POS_v1', null),
+	(2, 'Arduino DHT Temperature Monitoring by Network', 'project_dht_863x568.webp', 'https://github.com/TheNefelin/DHT', null),
+	(3, 'El Cubo v2.0', 'project_cube2_863x568.webp', null, null),
+	(4, 'Portafolio v1.0', 'project_portfolio1_863x568.webp', 'https://github.com/TheNefelin/Portafolio-NextJS', 'https://portafolio-next-js-xi.vercel.app'),
+	(5, 'Portafolio v2.0', 'project_portfolio2_863x568.webp', 'https://github.com/TheNefelin/Portafolio-Angular-ssr', 'https://portafolio-angular-ssr.vercel.app'),
+	(6, 'Bier Heart Page', 'project_bierheart_863x568.webp', 'https://github.com/TheNefelin/BierHeart_Vue', 'https://www.bierheart.cl'),
+	(7, 'WebP Converter', 'project_webp_863x568.webp', 'https://github.com/TheNefelin/Testing_.NETCore/tree/master/WebAppMVC.Test', null),
+	(8, 'Trueke Mobile App', 'project_trueke_863x568.webp', 'https://github.com/TheNefelin/Kambio_.NetCore', null),
+	(9, 'Password Manager Mobile App', 'project_pm_863x568.webp', 'https://github.com/TheNefelin/Portfolio_.NETCore/tree/master/MauiAppAdmin', null),
+	(10, 'Guides for Games (NextJS)', 'project_ggv1_863x568.webp', 'https://github.com/TheNefelin/game-guides-nextjs', 'https://game-guides-nextjs.vercel.app'),
+	(11, 'Portafolio v3.0', 'project_portfolio3_863x568.webp', 'https://github.com/TheNefelin/portfolio-astro', 'https://www.francisco-dev.cl')
 SET IDENTITY_INSERT PF_Projects OFF
 GO
 
@@ -126,48 +133,73 @@ VALUES
 	(12, 'Taildwind', 'tech_tailwindcss_512x512.webp'),
 	(13, 'Unity', 'tech_unity_512x512.webp'),
 	(14, 'Visual Studio', 'tech_visualstudio_512x512.webp'),
-	(15, 'VSCode', 'tech_vscode_512x512.webp')
+	(15, 'VSCode', 'tech_vscode_512x512.webp'),
+	(16, 'VueJS', 'tech_vue_512x512.webp'),
+	(17, 'AstroJS', 'tech_astro_512x512.webp')	
 SET IDENTITY_INSERT PF_Technologies OFF
 GO
 
 INSERT INTO PF_Pro_Lang
 	(Id_Project, Id_Language)
 VALUES
-	(1, 1),
-	(1, 2),
-	(1, 3),
-	(2, 1),
-	(2, 2),
-	(2, 3),
+	(1, 7),
+	(2, 7),
 	(3, 1),
-	(3, 2),
-	(3, 3),
-	(4, 1),
 	(4, 2),
 	(4, 3),
-	(5, 1),
+	(4, 5),
 	(5, 2),
-	(5, 3)
+	(5, 3),
+	(5, 6),
+	(6, 2),
+	(6, 3),
+	(6, 5),
+	(7, 1),
+	(8, 1),
+	(9, 1),
+	(10, 2),
+	(10, 3),
+	(10, 6),
+	(11, 2),
+	(11, 3),
+	(11, 6)
 GO
 
 INSERT INTO PF_Pro_Tech
 	(Id_Project, Id_Technology)
 VALUES
-	(1, 1),
-	(1, 2),
 	(1, 3),
-	(2, 1),
-	(2, 2),
+	(1, 14),
 	(2, 3),
-	(3, 1),
-	(3, 2),
-	(3, 3),
-	(4, 1),
-	(4, 2),
-	(4, 3),
+	(2, 14),
+	(3, 13),
+	(3, 14),
+	(4, 8),
+	(4, 15),
 	(5, 1),
-	(5, 2),
-	(5, 3)
+	(5, 12),
+	(5, 15),
+	(6, 12),
+	(6, 15),
+	(6, 16),
+	(7, 2),
+	(7, 3),
+	(7, 14),
+	(8, 2),
+	(8, 3),
+	(8, 6),
+	(8, 14),
+	(9, 3),
+	(9, 6),
+	(9, 14),
+	(10, 6),
+	(10, 8),
+	(10, 12),
+	(10, 15),
+	(11, 6),
+	(11, 12),
+	(11, 15),
+	(11, 17)
 GO
 
 SET IDENTITY_INSERT PF_UrlGrp ON
@@ -288,8 +320,8 @@ SELECT * FROM PF_UrlGrp
 SELECT * FROM PF_Url
 
 SELECT 
-	Id, Name, ImgUrl
-FROM PF_Projects
+	Id, Name, ImgUrl, RepoUrl, AppUrl
+FROM PF_Projects ORDER BY Id DESC
 
 SELECT 
 	a.Id, a.Name, a.ImgUrl, b.Id_Project
@@ -300,7 +332,6 @@ SELECT
 	a.Id, a.Name, a.ImgUrl, b.Id_Project
 FROM PF_Technologies a
 	INNER JOIN PF_Pro_Tech b ON a.Id = b.Id_Technology
-
 
 INSERT INTO PF_Url
 VALUES

@@ -44,7 +44,7 @@ namespace ClassLibrary.PortfolioDapper.Services
 
         private async Task<IEnumerable<ProjectEntity>> GetAllProjectsAsync(CancellationToken cancellationToken)
         {
-            var query = "SELECT Id, Name, ImgUrl FROM PF_Projects";
+            var query = "SELECT Id, Name, ImgUrl, RepoUrl, AppUrl FROM PF_Projects ORDER BY Id DESC";
             return await GetAll<ProjectEntity>(query, cancellationToken);
         }
 
@@ -129,6 +129,8 @@ namespace ClassLibrary.PortfolioDapper.Services
                     Id = p.Id,
                     Name = p.Name,
                     ImgUrl = p.ImgUrl,
+                    RepoUrl = p.RepoUrl,
+                    AppUrl = p.AppUrl,
                     Languages = languages.Where(l => l.Id_Project == p.Id).Select(nl => new DataLanguageDTO
                     {
                         Id = nl.Id,
