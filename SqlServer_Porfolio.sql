@@ -87,6 +87,7 @@ VALUES
 	(2, 'Projecto2', 'project_01_1330x875.webp'),
 	(3, 'Projecto3', 'project_01_1330x875.webp'),
 	(4, 'Projecto4', 'project_01_1330x875.webp'),
+	(5, 'Projecto5', 'project_01_1330x875.webp'),
 	(5, 'Projecto5', 'project_01_1330x875.webp')
 SET IDENTITY_INSERT PF_Projects OFF
 GO
