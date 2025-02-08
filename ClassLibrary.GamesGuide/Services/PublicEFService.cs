@@ -1,6 +1,6 @@
 ﻿using ClassLibrary.Common;
+using ClassLibrary.Common.DTOs;
 using ClassLibrary.GamesGuide.Connection;
-using ClassLibrary.GamesGuide.DTOs;
 using ClassLibrary.GamesGuide.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -9,10 +9,10 @@ namespace ClassLibrary.GamesGuide.Services
 {
     public class PublicEFService : IPublicService
     {
-        private readonly ILogger<GameEFService> _logger;
+        private readonly ILogger<PublicEFService> _logger;
         private readonly GamesGuideDbContext _context;
 
-        public PublicEFService(ILogger<GameEFService> logger, GamesGuideDbContext context)
+        public PublicEFService(ILogger<PublicEFService> logger, GamesGuideDbContext context)
         {
             _logger = logger;
             _context = context;
@@ -44,52 +44,68 @@ namespace ClassLibrary.GamesGuide.Services
                     Description = ga.Description,
                     ImgUrl = ga.ImgUrl,
                     IsActive = ga.IsActive,
-                    Characters = ga.Characters.Select(c => new DataCharacterDTO()
+                    Characters = ga.Characters.Select(ch => new DataCharacterDTO()
                     {
-                        Id = c.Id,
-                        Name = c.Name,
-                        Description = c.Description,
-                        ImgUrl = c.ImgUrl,
+                        Id = ch.Id,
+                        Name = ch.Name,
+                        Description = ch.Description,
+                        ImgUrl = ch.ImgUrl,
                     }).ToList(),
-                    Sources = ga.Source.Select(s => new DataSourceDTO()
+                    Sources = ga.Source.Select(sr => new DataSourceDTO()
                     {
-                        Id = s.Id,
-                        Name = s.Name,
-                        Url = s.Url,
+                        Id = sr.Id,
+                        Name = sr.Name,
+                        Url = sr.Url,
                     }).ToList(),
-                    Backgrounds = ga.Backgrounds.Select(b => new DataBackgroundDTO()
+                    Backgrounds = ga.Backgrounds.Select(bg => new DataBackgroundDTO()
                     {
-                        Id = b.Id,
-                        ImgUrl = b.ImgUrl,
+                        Id = bg.Id,
+                        ImgUrl = bg.ImgUrl,
                     }).ToList(),
                     Guides = ga.Guides.Select(gu => new DataGuideDTO()
                     {
                         Id = gu.Id,
                         Name = gu.Name,
                         Sort = gu.Sort,
-                        GuidesUser = gu.GuidesUser.Select(gu => new DataGuideUserDTO()
-                        {
-                            Id_Guide = gu.Id_Guide,
-                            Id_User = gu.Id_User,
-                            IsCheck = gu.IsCheck,
-                        }).ToList(),
-                        Adventures = gu.Adventures.Select(ad => new DataAdventureDTO()
-                        {
-                            Id = ad.Id,
-                            Description = ad.Description,
-                            IsImportant = ad.IsImportant,
-                            Sort = ad.Sort,
-                            AdventuresUser = ad.AdventuresUser.Select(au => new DataAdventureUserDTO()
+                        GuideUser = gu.GuidesUser
+                            .Where(guu => guu.Id_Guide == gu.Id)
+                            .Select(guu => new DataGuideUserDTO
                             {
-                                Id_User = au.Id_User,
-                                Id_Adventure = au.Id_Adventure,
-                                IsCheck = au.IsCheck,
-                            }).ToList(),
-                            AdventuresImg = ad.AdventuresImg.Select(ad => new DataAdventureImgDTO()
+                                Id_Guide = guu.Id_Guide,
+                                Id_User = guu.Id_User,
+                                IsCheck = guu.IsCheck,
+                            })
+                            .FirstOrDefault() ?? (new DataGuideUserDTO
                             {
-                                Id = ad.Id,
-                                ImgUrl = ad.ImgUrl,
-                                Sort = ad.Sort,
+                                Id_Guide = gu.Id,
+                                Id_User = null,
+                                IsCheck = false,
+                            }),
+                        Adventures = gu.Adventures.Select(adv => new DataAdventureDTO()
+                        {
+                            Id = adv.Id,
+                            Description = adv.Description,
+                            IsImportant = adv.IsImportant,
+                            Sort = adv.Sort,
+                            AdventureUser = adv.AdventuresUser
+                                .Where(advu => advu.Id_Adventure == adv.Id)
+                                .Select(advu => new DataAdventureUserDTO
+                                {
+                                    Id_Adventure = advu.Id_Adventure,
+                                    Id_User = advu.Id_User,
+                                    IsCheck = advu.IsCheck,
+                                })
+                                .FirstOrDefault() ?? (new DataAdventureUserDTO
+                                {
+                                    Id_Adventure = adv.Id,
+                                    Id_User = null,
+                                    IsCheck = false,
+                                }),
+                            AdventuresImg = adv.AdventuresImg.Select(advi => new DataAdventureImgDTO()
+                            {
+                                Id = advi.Id,
+                                ImgUrl = advi.ImgUrl,
+                                Sort = advi.Sort,
                             }).ToList(),
                         }).ToList(),
                     }).ToList(),

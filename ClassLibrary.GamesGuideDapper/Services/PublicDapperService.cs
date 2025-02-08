@@ -1,5 +1,6 @@
 ﻿using ClassLibrary.Common;
 using ClassLibrary.Common.DTOs;
+using ClassLibrary.GamesGuideDapper.DTOs;
 using ClassLibrary.GamesGuideDapper.Interfaces;
 using System.Data;
 
@@ -96,36 +97,36 @@ namespace ClassLibrary.GamesGuideDapper.Services
                         Name = gu.Name,
                         Sort = gu.Sort,
                         GuideUser = guideUser
-                        .Where(guu => guu.Id_Guide == gu.Id && guu.Id_User == Id_User)
-                        .Select(guu => new DataGuideUserDTO { 
-                            Id_Guide = guu.Id_Guide,
-                            Id_User = guu.Id_User,
-                            IsCheck = guu.IsCheck,
-                        })
-                        .FirstOrDefault() ?? (new DataGuideUserDTO { 
-                            Id_Guide = gu.Id,
-                            Id_User = Id_User,
-                            IsCheck = false
-                        }),
-                        Adventures = adventure.Where(adv => adv.Id_Guide == gu.Id).Select(adv => new DataAdventureDTO
+                            .Where(guu => guu.Id_Guide == gu.Id && guu.Id_User == Id_User)
+                            .Select(guu => new DataGuideUserDTO { 
+                                Id_Guide = guu.Id_Guide,
+                                Id_User = guu.Id_User,
+                                IsCheck = guu.IsCheck,
+                            })
+                            .FirstOrDefault() ?? (new DataGuideUserDTO { 
+                                Id_Guide = gu.Id,
+                                Id_User = Id_User,
+                                IsCheck = false
+                            }),
+                        Adventures = adventure.Where(ad => ad.Id_Guide == gu.Id).Select(adv => new DataAdventureDTO
                         {
                             Id = adv.Id,
                             Description = adv.Description,
                             IsImportant = adv.IsImportant,
                             Sort = adv.Sort,
                             AdventureUser = adventureUser
-                            .Where(advu => advu.Id_Adventure == adv.Id && advu.Id_User == Id_User)
-                            .Select(advu => new DataAdventureUserDTO
-                            {
-                                Id_Adventure = advu.Id_Adventure,
-                                Id_User = advu.Id_User,
-                                IsCheck = advu.IsCheck,
-                            })
-                            .FirstOrDefault() ?? (new DataAdventureUserDTO {
-                                Id_Adventure = adv.Id,
-                                Id_User = Id_User,
-                                IsCheck = false
-                            }),
+                                .Where(advu => advu.Id_Adventure == adv.Id && advu.Id_User == Id_User)
+                                .Select(advu => new DataAdventureUserDTO
+                                {
+                                    Id_Adventure = advu.Id_Adventure,
+                                    Id_User = advu.Id_User,
+                                    IsCheck = advu.IsCheck,
+                                })
+                                .FirstOrDefault() ?? (new DataAdventureUserDTO {
+                                    Id_Adventure = adv.Id,
+                                    Id_User = Id_User,
+                                    IsCheck = false
+                                }),
                             AdventuresImg = adventureImg.Where(adi => adi.Id_Adventure == adv.Id).Select(adi => new DataAdventureImgDTO
                             {
                                 Id = adi.Id,

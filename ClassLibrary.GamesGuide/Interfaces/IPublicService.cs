@@ -1,5 +1,5 @@
 ﻿using ClassLibrary.Common;
-using ClassLibrary.GamesGuide.DTOs;
+using ClassLibrary.Common.DTOs;
 
 namespace ClassLibrary.GamesGuide.Interfaces
 {

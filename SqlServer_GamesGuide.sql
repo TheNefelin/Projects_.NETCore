@@ -96,8 +96,6 @@ GO
 
 DROP TABLE __EFMigrationsHistory
 GO
-DROP TABLE Mae_Config
-GO
 DROP TABLE GG_AdventuresImg
 GO
 DROP TABLE GG_AdventuresUser
@@ -1534,9 +1532,7 @@ GO
 -- Query --------------------------------------------------------
 -- --------------------------------------------------------------
 
-SELECT * FROM Mae_Config
-SELECT * FROM GG_Users
-
+SELECT * FROM GG_Users0
 SELECT * FROM GG_Games
 SELECT * FROM GG_Characters
 SELECT * FROM GG_Sources
@@ -1547,10 +1543,9 @@ SELECT * FROM GG_AdventuresImg
 SELECT * FROM GG_GuidesUser
 SELECT * FROM GG_AdventuresUser
 
-EXECUTE GG_Login 'b@b', '456', '789'
+EXECUTE GG_Login 'b@b', '123', '456'
 EXECUTE GG_GuidesUser_Set 1, '2881E494-D76B-4D37-B4FF-15D4257E09EB', 
-EXECUTE GG_AdventuresUser_Set 10, '123', 1
-
+EXECUTE GG_AdventuresUser_Set 1, '2881E494-D76B-4D37-B4FF-15D4257E09EB', 1
 
 -- --------------------------------------------------------------
 -- --------------------------------------------------------------

@@ -1,9 +1,11 @@
-using ClassLibrary.Common.DTOs;
+using ClassLibrary.Common.Services;
 using ClassLibrary.GamesGuide.Connection;
 using ClassLibrary.GamesGuide.Interfaces;
 using ClassLibrary.GamesGuide.Services;
+using ClassLibrary.GamesGuideDapper.DTOs;
 using ClassLibrary.GamesGuideDapper.Interfaces;
 using ClassLibrary.GamesGuideDapper.Services;
+using ClassLibrary.PortfolioDapper.Interfaces;
 using ClassLibrary.PortfolioDapper.Services;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 // DataBase Connection -----------------------------------------------
-builder.Services.AddDbContext<GamesGuideDbContext>(options => // EntityFramework
+builder.Services.AddDbContext<GamesGuideDbContext>(options => // EntityFramework Connection
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerWeb"));
 });
@@ -31,7 +33,6 @@ builder.Services.AddScoped<SqlConnection>(options => // SqlServer Connection
 
 // Dependency injection ----------------------------------------------
 builder.Services.AddTransient<IPublicService, PublicEFService>();
-builder.Services.AddTransient<IGamesService, GameEFService>();
 
 builder.Services.AddTransient<IServiceCRUD<GameDTO>, GameDapperService>();
 builder.Services.AddTransient<IServiceCRUD<CharacterDTO>, CharacterDapperService>();
@@ -40,15 +41,15 @@ builder.Services.AddTransient<IServiceCRUD<BackgroundDTO>, BackgroundDapperServi
 builder.Services.AddTransient<IServiceCRUD<GuideDTO>, GuideDapperService>();
 builder.Services.AddTransient<IServiceCRUD<AdventureDTO>, AdventureDapperService>();
 builder.Services.AddTransient<IServiceCRUD<AdventureImgDTO>, AdventureImgDapperService>();
-builder.Services.AddTransient<IPublicDapperService, PublicDapperService>();
 builder.Services.AddTransient<IServiceUserCRUD<GuideUserDTO>, GuideUserDapperService>();
 builder.Services.AddTransient<IServiceUserCRUD<AdventureUserDTO>, AdventureUserDapperService>();
+builder.Services.AddTransient<IPublicDapperService, PublicDapperService>();
 
-builder.Services.AddTransient<PortfolioService>();
+builder.Services.AddTransient<IPortfolioService, PortfolioService>();
 
+builder.Services.AddScoped<ApiKeyService>();
 builder.Services.AddScoped<AuthGoogleService>();
-builder.Services.AddScoped<IApiKeyService, ApiKeyService>();
-builder.Services.AddScoped<AuthApiKeyFilter>();
+builder.Services.AddScoped<ApiKeyFilter>();
 // -------------------------------------------------------------------
 
 builder.Services.AddControllers();

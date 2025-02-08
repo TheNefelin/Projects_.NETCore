@@ -1,12 +1,13 @@
 ﻿using ClassLibrary.Common;
-using ClassLibrary.PortfolioDapper.Models.DTOs;
-using ClassLibrary.PortfolioDapper.Models.Entities;
+using ClassLibrary.PortfolioDapper.DTOs;
+using ClassLibrary.PortfolioDapper.Entities;
+using ClassLibrary.PortfolioDapper.Interfaces;
 using Dapper;
 using Microsoft.Data.SqlClient;
 
 namespace ClassLibrary.PortfolioDapper.Services
 {
-    public class PortfolioService
+    public class PortfolioService : IPortfolioService
     {
         private readonly SqlConnection _connection;
 

@@ -1,6 +1,7 @@
 ﻿using ClassLibrary.Common;
 using ClassLibrary.Common.DTOs;
 using ClassLibrary.GamesGuide.Interfaces;
+using ClassLibrary.GamesGuideDapper.DTOs;
 using ClassLibrary.GamesGuideDapper.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Filters;
@@ -9,7 +10,7 @@ namespace WebApi.Controllers
 {
     [Route("api/game-guide")]
     [ApiController]
-    [ServiceFilter(typeof(AuthApiKeyFilter))]
+    [ServiceFilter(typeof(ApiKeyFilter))]
     public class GameGuideController : ControllerBase
     {
         private readonly ILogger<GameGuideController> _logger;

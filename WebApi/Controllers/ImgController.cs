@@ -5,7 +5,6 @@ namespace WebApi.Controllers
 {
     [Route("api/img")]
     [ApiController]
-    //[ServiceFilter(typeof(AuthApiKeyFilter))]
     public class ImgController : ControllerBase
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -16,7 +15,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("games-guide")]
+        [Route("game-guide")]
         public IActionResult GetGuideGameImg(string fileName)
         {
             string path = Path.Combine(_webHostEnvironment.WebRootPath, "GamesGuide");
@@ -34,6 +33,7 @@ namespace WebApi.Controllers
 
         [HttpGet]
         [Route("f1")]
+        [ServiceFilter(typeof(ApiKeyFilter))]
         public IActionResult GetF1Img(string fileName)
         {
             string path = Path.Combine(_webHostEnvironment.WebRootPath, "F1");

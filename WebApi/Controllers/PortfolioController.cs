@@ -1,24 +1,27 @@
 ﻿
 using ClassLibrary.Common;
-using ClassLibrary.PortfolioDapper.Models.DTOs;
-using ClassLibrary.PortfolioDapper.Services;
+using ClassLibrary.PortfolioDapper.DTOs;
+using ClassLibrary.PortfolioDapper.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
     [Route("api/portfolio")]
     [ApiController]
+    [ServiceFilter(typeof(ApiKeyFilter))]
     public class PortfolioController : ControllerBase
     {
-        private readonly PortfolioService _portfolioService;
+        private readonly IPortfolioService _portfolioService;
 
-        public PortfolioController(PortfolioService portfolioService)
+        public PortfolioController(IPortfolioService portfolioService)
         {
             _portfolioService = portfolioService;
         }
 
         [HttpGet("projects")]
-        public async Task<ActionResult<ResponseApi<IEnumerable<DataProjectDTO>>>> GetAllProjects(CancellationToken cancellationToken) {
+        public async Task<ActionResult<ResponseApi<IEnumerable<DataProjectDTO>>>> GetAllProjects(CancellationToken cancellationToken) 
+        {
             var res = await _portfolioService.GetAll_Projects_Async(cancellationToken);
             return StatusCode(res.StatusCode, res);
         }

@@ -1,5 +1,5 @@
 ﻿using ClassLibrary.Common;
-using ClassLibrary.Common.DTOs;
+using ClassLibrary.GamesGuideDapper.DTOs;
 using ClassLibrary.GamesGuideDapper.Interfaces;
 using Dapper;
 using System.Data;
