@@ -8,8 +8,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlServer", "SqlServer", "{5B3453C3-2210-4778-BEB6-93427EE4F104}"
 	ProjectSection(SolutionItems) = preProject
 		SqlServer_Common.sql = SqlServer_Common.sql
-		SqlServer_Porfolio.sql = SqlServer_Porfolio.sql
+		SqlServer_F1.sql = SqlServer_F1.sql
 		SqlServer_GamesGuide.sql = SqlServer_GamesGuide.sql
+		SqlServer_Porfolio.sql = SqlServer_Porfolio.sql
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary.GamesGuide", "ClassLibrary.GamesGuide\ClassLibrary.GamesGuide.csproj", "{26538605-4278-4A2F-B7C1-003481609A1A}"
