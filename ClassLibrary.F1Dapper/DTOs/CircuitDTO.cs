@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
+        public string ImgCircuit { get; set; } = string.Empty;
         public FlagDTO Flag { get; set; }
     }
 }

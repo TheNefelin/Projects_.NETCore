@@ -38,7 +38,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("circuits")]
-        public async Task<ActionResult<ResponseApi<IEnumerable<PilotDTO>>>> GetAllCircuits(CancellationToken cancellationToken)
+        public async Task<ActionResult<ResponseApi<IEnumerable<CircuitDTO>>>> GetAllCircuits(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Received request to fetch all Circuits.");
             var result = await _service.GetAll_Circuits_Async(cancellationToken);

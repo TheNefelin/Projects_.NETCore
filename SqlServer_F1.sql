@@ -181,7 +181,7 @@ GO
 
 SELECT Id, Name, ImgFlag FROM F1_Flags
 SELECT Id, Name, ImgCar, Id_Flag FROM F1_Teams
-SELECT Id, Name, Id_Flag FROM F1_Circuits
+SELECT Id, Name, ImgCircuit, Id_Flag FROM F1_Circuits
 SELECT Id, Name, DateBirth, Height, Weight, Dorsal, ImgProfile, IsAlive, Points, Id_Flag, Id_Team FROM F1_Pilots
 
 SELECT * FROM F1_Racing

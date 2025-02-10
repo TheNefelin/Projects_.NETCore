@@ -51,7 +51,7 @@ namespace ClassLibrary.F1Dapper.Services
 
         private async Task<IEnumerable<CircuitEntity>> GetAllCircuitsAsync(CancellationToken cancellationToken)
         {
-            var query = "SELECT Id, Name, Id_Flag FROM F1_Circuits";
+            var query = "SELECT Id, Name, ImgCircuit, Id_Flag FROM F1_Circuits";
             return await GetAll<CircuitEntity>(query, cancellationToken);
         }
 
@@ -208,6 +208,7 @@ namespace ClassLibrary.F1Dapper.Services
                 {
                     Id = nct.Id,
                     Name = nct.Name,
+                    ImgCircuit = nct.ImgCircuit,
                     Flag = flags.Where(fl => fl.Id == nct.Id_Flag).Select(nfl => new FlagDTO
                     {
                         Id = nfl.Id,
