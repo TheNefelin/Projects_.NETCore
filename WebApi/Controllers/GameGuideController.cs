@@ -14,17 +14,17 @@ namespace WebApi.Controllers
     public class GameGuideController : ControllerBase
     {
         private readonly ILogger<GameGuideController> _logger;
-        public readonly IPublicService _publicService;
-        public readonly IPublicDapperService _dapper;
+        public readonly IGameGuideEFService _publicService;
+        public readonly IGameGuideDapperService _dapper;
         public readonly IServiceUserCRUD<GuideUserDTO> _guideUser;
         public readonly IServiceUserCRUD<AdventureUserDTO> _adventureUser;
 
         public GameGuideController(
             ILogger<GameGuideController> logger,
-            IPublicService publicService,
+            IGameGuideEFService publicService,
             IServiceUserCRUD<GuideUserDTO> guideUser,
             IServiceUserCRUD<AdventureUserDTO> adventureUser,
-            IPublicDapperService dapper)
+            IGameGuideDapperService dapper)
         {
             _logger = logger;
             _publicService = publicService;

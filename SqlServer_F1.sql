@@ -21,6 +21,7 @@ GO
 CREATE TABLE F1_Circuits (
 	Id INT PRIMARY KEY IDENTITY(1,1),
 	Name VARCHAR(256) NOT NULL,
+	ImgCircuit VARCHAR(50) NOT NULL,
 	Id_Flag INT NOT NULL,
 	FOREIGN KEY (Id_Flag) REFERENCES F1_Flags(Id),
 )
@@ -116,31 +117,31 @@ GO
 SET IDENTITY_INSERT F1_Circuits ON
 GO
 INSERT INTO F1_Circuits
-	(Id, Name, Id_Flag)
+	(Id, Name, ImgCircuit, Id_Flag)
 VALUES
-	(1,'Gulf Air Bahrain GP, Bahrain International Circuit',18),
-	(2,'STC Saudi Arabian GP, Jeddah Street Circuit',19),
-	(3,'Rolex Australian GP, Circuito Grand Prix Melbourne',4),
-	(4,'GP de Azerbaiyán, Baku City Circuit',20),
-	(5,'Crypto.com Miami GP, Miami International Autodrome',15),
-	(6,'Made in Italy Emilia Romagna GP, Autodromo Enzo e Dino Ferrari',17),
-	(7,'GP de Mónaco, Circuit de Monaco',8),
-	(8,'AWS Spanish GP, Circuit de Barcelona-Catalunya',7),
-	(9,'Pirelli Canada GP, Circuit Gilles-Villeneuve',6),
-	(10,'GP de Austria, Red Bull Ring',12),
-	(11,'Aramco British GP, Silverstone Circuit',11),
-	(12,'GP de Hungría, Hungaroring',21),
-	(13,'GP de Bélgica, Circuit de Spa-Francorchamps',13),
-	(14,'Heineken Dutch GP, Circuit Park Zandvoort',22),
-	(15,'Pirelli Italian GP, Autodromo Nazionale Monza',17),
-	(16,'Singapore Airlines Singapore GP, Marina Bay Street Circuit',23),
-	(17,'Lenovo Japanese GP, Suzuka International Racing Course',5),
-	(18,'Qatar GP, Losail International Circuit',24),
-	(19,'Lenovo United States GP, Circuit of the Americas',15),
-	(20,'Mexico GP, Autodromo Hermanos Rodriguez',14),
-	(21,'Rolex Brazil GP, Autodromo Jose Carlos Pace',25),
-	(22,'Heineken Las Vegas GP, Las Vegas Street Circuit',15),
-	(23,'Etihad Airways Abu Dhabi GP, Yas Marina Circuit',26)
+	(1,'Gulf Air Bahrain GP, Bahrain International Circuit','circuit_01_600x600.webp',18),
+	(2,'STC Saudi Arabian GP, Jeddah Street Circuit','circuit_02_600x600.webp',19),
+	(3,'Rolex Australian GP, Circuito Grand Prix Melbourne','circuit_03_600x600.webp',4),
+	(4,'GP de Azerbaiyán, Baku City Circuit','circuit_04_600x600.webp',20),
+	(5,'Crypto.com Miami GP, Miami International Autodrome','circuit_05_600x600.webp',15),
+	(6,'Made in Italy Emilia Romagna GP, Autodromo Enzo e Dino Ferrari','circuit_06_600x600.webp',17),
+	(7,'GP de Mónaco, Circuit de Monaco','circuit_07_600x600.webp',8),
+	(8,'AWS Spanish GP, Circuit de Barcelona-Catalunya','circuit_08_600x600.webp',7),
+	(9,'Pirelli Canada GP, Circuit Gilles-Villeneuve','circuit_09_600x600.webp',6),
+	(10,'GP de Austria, Red Bull Ring','circuit_10_600x600.webp',12),
+	(11,'Aramco British GP, Silverstone Circuit','circuit_11_600x600.webp',11),
+	(12,'GP de Hungría, Hungaroring','circuit_12_600x600.webp',21),
+	(13,'GP de Bélgica, Circuit de Spa-Francorchamps','circuit_13_600x600.webp',13),
+	(14,'Heineken Dutch GP, Circuit Park Zandvoort','circuit_14_600x600.webp',22),
+	(15,'Pirelli Italian GP, Autodromo Nazionale Monza','circuit_15_600x600.webp',17),
+	(16,'Singapore Airlines Singapore GP, Marina Bay Street Circuit','circuit_16_600x600.webp',23),
+	(17,'Lenovo Japanese GP, Suzuka International Racing Course','circuit_17_600x600.webp',5),
+	(18,'Qatar GP, Losail International Circuit','circuit_18_600x600.webp',24),
+	(19,'Lenovo United States GP, Circuit of the Americas','circuit_19_600x600.webp',15),
+	(20,'Mexico GP, Autodromo Hermanos Rodriguez','circuit_20_600x600.webp',14),
+	(21,'Rolex Brazil GP, Autodromo Jose Carlos Pace','circuit_21_600x600.webp',25),
+	(22,'Heineken Las Vegas GP, Las Vegas Street Circuit','circuit_22_600x600.webp',15),
+	(23,'Etihad Airways Abu Dhabi GP, Yas Marina Circuit','circuit_23_600x600.webp',26)
 SET IDENTITY_INSERT F1_Circuits OFF
 GO
 
@@ -172,21 +173,18 @@ VALUES
 SET IDENTITY_INSERT F1_Pilots OFF
 GO
 
-
-SELECT * 
-	--'(' + LTRIM(STR(Id)) + ',''' + Nombre + ''',' + LTRIM(STR(IdPais)) + '),'
-FROM F1Carreras
-
 -- Stored Procedure ---------------------------------------------
 -- --------------------------------------------------------------
 
 -- Query --------------------------------------------------------
 -- --------------------------------------------------------------
 
-SELECT * FROM F1_Flags
-SELECT * FROM F1_Teams
-SELECT * FROM F1_Circuits
-SELECT * FROM F1_Pilots
+SELECT Id, Name, ImgFlag FROM F1_Flags
+SELECT Id, Name, ImgCar, Id_Flag FROM F1_Teams
+SELECT Id, Name, Id_Flag FROM F1_Circuits
+SELECT Id, Name, DateBirth, Height, Weight, Dorsal, ImgProfile, IsAlive, Points, Id_Flag, Id_Team FROM F1_Pilots
+
+SELECT * FROM F1_Racing
 
 -- --------------------------------------------------------------
 -- --------------------------------------------------------------

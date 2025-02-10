@@ -1,4 +1,6 @@
 using ClassLibrary.Common.Services;
+using ClassLibrary.F1Dapper.Interfaces;
+using ClassLibrary.F1Dapper.Services;
 using ClassLibrary.GamesGuide.Connection;
 using ClassLibrary.GamesGuide.Interfaces;
 using ClassLibrary.GamesGuide.Services;
@@ -32,7 +34,7 @@ builder.Services.AddScoped<SqlConnection>(options => // SqlServer Connection
 // -------------------------------------------------------------------
 
 // Dependency injection ----------------------------------------------
-builder.Services.AddTransient<IPublicService, PublicEFService>();
+builder.Services.AddTransient<IGameGuideEFService, GameGuideEFService>();
 
 builder.Services.AddTransient<IServiceCRUD<GameDTO>, GameDapperService>();
 builder.Services.AddTransient<IServiceCRUD<CharacterDTO>, CharacterDapperService>();
@@ -43,9 +45,11 @@ builder.Services.AddTransient<IServiceCRUD<AdventureDTO>, AdventureDapperService
 builder.Services.AddTransient<IServiceCRUD<AdventureImgDTO>, AdventureImgDapperService>();
 builder.Services.AddTransient<IServiceUserCRUD<GuideUserDTO>, GuideUserDapperService>();
 builder.Services.AddTransient<IServiceUserCRUD<AdventureUserDTO>, AdventureUserDapperService>();
-builder.Services.AddTransient<IPublicDapperService, PublicDapperService>();
+builder.Services.AddTransient<IGameGuideDapperService, GameGuideDapperService>();
 
 builder.Services.AddTransient<IPortfolioService, PortfolioService>();
+
+builder.Services.AddTransient<IF1Service, F1Service>();
 
 builder.Services.AddScoped<ApiKeyService>();
 builder.Services.AddScoped<AuthGoogleService>();

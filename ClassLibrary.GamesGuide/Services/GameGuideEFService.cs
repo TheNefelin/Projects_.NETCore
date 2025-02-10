@@ -7,12 +7,12 @@ using Microsoft.Extensions.Logging;
 
 namespace ClassLibrary.GamesGuide.Services
 {
-    public class PublicEFService : IPublicService
+    public class GameGuideEFService : IGameGuideEFService
     {
-        private readonly ILogger<PublicEFService> _logger;
+        private readonly ILogger<GameGuideEFService> _logger;
         private readonly GamesGuideDbContext _context;
 
-        public PublicEFService(ILogger<PublicEFService> logger, GamesGuideDbContext context)
+        public GameGuideEFService(ILogger<GameGuideEFService> logger, GamesGuideDbContext context)
         {
             _logger = logger;
             _context = context;

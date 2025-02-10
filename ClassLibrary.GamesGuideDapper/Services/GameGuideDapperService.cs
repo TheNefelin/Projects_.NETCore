@@ -6,7 +6,7 @@ using System.Data;
 
 namespace ClassLibrary.GamesGuideDapper.Services
 {
-    public class PublicDapperService : IPublicDapperService
+    public class GameGuideDapperService : IGameGuideDapperService
     {
         private readonly IServiceCRUD<GameDTO> _game;
         private readonly IServiceCRUD<CharacterDTO> _character;
@@ -18,7 +18,7 @@ namespace ClassLibrary.GamesGuideDapper.Services
         private readonly IServiceUserCRUD<GuideUserDTO> _guideUser;
         private readonly IServiceUserCRUD<AdventureUserDTO> _adventureUser;
 
-        public PublicDapperService(
+        public GameGuideDapperService(
             IServiceCRUD<GameDTO> game,
             IServiceCRUD<CharacterDTO> character,
             IServiceCRUD<SourceDTO> source,

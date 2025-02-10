@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary.GamesGuideDapp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary.PortfolioDapper", "ClassLibrary.PortfolioDapper\ClassLibrary.PortfolioDapper.csproj", "{192ADC00-2168-4589-9488-033AC221B787}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary.F1Dapper", "ClassLibrary.F1Dapper\ClassLibrary.F1Dapper.csproj", "{F4979F06-B22A-4325-A721-85044D9FAF37}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{192ADC00-2168-4589-9488-033AC221B787}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{192ADC00-2168-4589-9488-033AC221B787}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{192ADC00-2168-4589-9488-033AC221B787}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4979F06-B22A-4325-A721-85044D9FAF37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4979F06-B22A-4325-A721-85044D9FAF37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4979F06-B22A-4325-A721-85044D9FAF37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4979F06-B22A-4325-A721-85044D9FAF37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

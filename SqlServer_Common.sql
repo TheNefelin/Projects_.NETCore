@@ -13,6 +13,17 @@ GO
 DROP TABLE Mae_Config
 GO
 
+DROP TABLE F1_Pilots
+GO
+DROP TABLE F1_Racing
+GO
+DROP TABLE F1_Circuits
+GO
+DROP TABLE F1_Teams
+GO
+DROP TABLE F1_Flags
+GO
+
 DROP TABLE GG_AdventuresImg
 GO
 DROP TABLE GG_AdventuresUser
@@ -73,8 +84,6 @@ GO
 
 -- Query --------------------------------------------------------
 -- --------------------------------------------------------------
-
-SELECT * FROM Mae_Config
 
 -- --------------------------------------------------------------
 -- --------------------------------------------------------------
