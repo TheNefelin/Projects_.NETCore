@@ -1,7 +1,6 @@
-﻿using ClassLibrary.Common;
-using ClassLibrary.Common.DTOs;
-using ClassLibrary.GamesGuide.Interfaces;
+﻿using ClassLibrary.Common.Models;
 using ClassLibrary.GamesGuideDapper.DTOs;
+using ClassLibrary.GamesGuideDapper.Entities;
 using ClassLibrary.GamesGuideDapper.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Filters;
@@ -10,39 +9,37 @@ namespace WebApi.Controllers
 {
     [Route("api/game-guide")]
     [ApiController]
-    [ServiceFilter(typeof(ApiKeyFilter))]
+    //[ServiceFilter(typeof(ApiKeyFilter))]
     public class GameGuideController : ControllerBase
     {
         private readonly ILogger<GameGuideController> _logger;
-        public readonly IGameGuideEFService _publicService;
-        public readonly IGameGuideDapperService _dapper;
-        public readonly IServiceUserCRUD<GuideUserDTO> _guideUser;
-        public readonly IServiceUserCRUD<AdventureUserDTO> _adventureUser;
+        private readonly IGameGuideDapperService _dapper;
+        private readonly IServiceUserCRUD<GuideUserEntity> _guideUser;
+        private readonly IServiceUserCRUD<AdventureUserEntity> _adventureUser;
+        private readonly IAuthGoogleService _authGoogleService;
 
         public GameGuideController(
             ILogger<GameGuideController> logger,
-            IGameGuideEFService publicService,
-            IServiceUserCRUD<GuideUserDTO> guideUser,
-            IServiceUserCRUD<AdventureUserDTO> adventureUser,
-            IGameGuideDapperService dapper)
+            IServiceUserCRUD<GuideUserEntity> guideUser,
+            IServiceUserCRUD<AdventureUserEntity> adventureUser,
+            IGameGuideDapperService dapper,
+            IAuthGoogleService authGoogleService)
         {
             _logger = logger;
-            _publicService = publicService;
             _guideUser = guideUser;
             _adventureUser = adventureUser;
             _dapper = dapper;
+            _authGoogleService = authGoogleService;
         }
 
-        [HttpGet("ef")]
-        public async Task<ActionResult<ResponseApi<IEnumerable<DataGameDTO>>>> GetAllEF(CancellationToken cancellationToken)
+        [HttpPost("auth-google")]
+        public async Task<ActionResult<ResponseApi<LoggedToken>>> GoogleLoginAsync(LoginGoogle login, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Received request to fetch all games.");
-            var result = await _publicService.GetAllGamesAsync(cancellationToken);
-
+            var result = await _authGoogleService.LoginGoogleAsync(login, cancellationToken);
             return StatusCode(result.StatusCode, result);
         }
 
-        [HttpGet("dapper/{iduser?}")]
+        [HttpGet("{iduser?}")]
         public async Task<ActionResult<ResponseApi<IEnumerable<DataGameDTO>>>> GetAllDapper(string? iduser, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Received request to fetch all games.");
@@ -52,7 +49,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("guide")]
-        public async Task<ActionResult<ResponseApi<object>>> PostGameDapper(GuideUserDTO gameUser, CancellationToken cancellationToken)
+        public async Task<ActionResult<ResponseApi<object>>> PostGameDapper(GuideUserEntity gameUser, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Received request to Check Guide.");
             var result = await _guideUser.UpdateAsync(gameUser, cancellationToken);
@@ -61,7 +58,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("adventure")]
-        public async Task<ActionResult<ResponseApi<object>>> PostAdventureDapper(AdventureUserDTO adventureUser, CancellationToken cancellationToken)
+        public async Task<ActionResult<ResponseApi<object>>> PostAdventureDapper(AdventureUserEntity adventureUser, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Received request to Check Adventure.");
             var result = await _adventureUser.UpdateAsync(adventureUser, cancellationToken);

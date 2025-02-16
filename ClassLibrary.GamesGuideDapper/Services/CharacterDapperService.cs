@@ -1,11 +1,11 @@
-﻿using ClassLibrary.GamesGuideDapper.DTOs;
+﻿using ClassLibrary.GamesGuideDapper.Entities;
 using ClassLibrary.GamesGuideDapper.Interfaces;
 using Dapper;
 using System.Data;
 
 namespace ClassLibrary.GamesGuideDapper.Services
 {
-    public class CharacterDapperService : IServiceCRUD<CharacterDTO>
+    public class CharacterDapperService : IServiceCRUD<CharacterEntity>
     {
         private readonly IDbConnection _dapper;
 
@@ -14,12 +14,12 @@ namespace ClassLibrary.GamesGuideDapper.Services
             _dapper = dapper;
         }
 
-        public async Task<IEnumerable<CharacterDTO>> GetAllAsync(CancellationToken cancellationToken)
+        public async Task<IEnumerable<CharacterEntity>> GetAllAsync(CancellationToken cancellationToken)
         {
             var query = "SELECT Id, Name, Description, ImgUrl, Id_Game FROM GG_Characters";
             try
             {
-                var result = await _dapper.QueryAsync<CharacterDTO>(query);
+                var result = await _dapper.QueryAsync<CharacterEntity>(query);
                 return result;
             }
             catch (Exception ex)

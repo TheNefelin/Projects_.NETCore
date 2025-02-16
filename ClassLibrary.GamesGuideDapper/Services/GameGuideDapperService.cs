@@ -1,6 +1,6 @@
-﻿using ClassLibrary.Common;
-using ClassLibrary.Common.DTOs;
+﻿using ClassLibrary.Common.Models;
 using ClassLibrary.GamesGuideDapper.DTOs;
+using ClassLibrary.GamesGuideDapper.Entities;
 using ClassLibrary.GamesGuideDapper.Interfaces;
 using System.Data;
 
@@ -8,26 +8,26 @@ namespace ClassLibrary.GamesGuideDapper.Services
 {
     public class GameGuideDapperService : IGameGuideDapperService
     {
-        private readonly IServiceCRUD<GameDTO> _game;
-        private readonly IServiceCRUD<CharacterDTO> _character;
-        private readonly IServiceCRUD<SourceDTO> _source;
-        private readonly IServiceCRUD<BackgroundDTO> _background;
-        private readonly IServiceCRUD<GuideDTO> _guide;
-        private readonly IServiceCRUD<AdventureDTO> _adventure;
-        private readonly IServiceCRUD<AdventureImgDTO> _adventureImg;
-        private readonly IServiceUserCRUD<GuideUserDTO> _guideUser;
-        private readonly IServiceUserCRUD<AdventureUserDTO> _adventureUser;
+        private readonly IServiceCRUD<GameEntity> _game;
+        private readonly IServiceCRUD<CharacterEntity> _character;
+        private readonly IServiceCRUD<SourceEntity> _source;
+        private readonly IServiceCRUD<BackgroundEntity> _background;
+        private readonly IServiceCRUD<GuideEntity> _guide;
+        private readonly IServiceCRUD<AdventureEntity> _adventure;
+        private readonly IServiceCRUD<AdventureImgEntity> _adventureImg;
+        private readonly IServiceUserCRUD<GuideUserEntity> _guideUser;
+        private readonly IServiceUserCRUD<AdventureUserEntity> _adventureUser;
 
         public GameGuideDapperService(
-            IServiceCRUD<GameDTO> game,
-            IServiceCRUD<CharacterDTO> character,
-            IServiceCRUD<SourceDTO> source,
-            IServiceCRUD<BackgroundDTO> background,
-            IServiceCRUD<GuideDTO> guide,
-            IServiceCRUD<AdventureDTO> adventure,
-            IServiceCRUD<AdventureImgDTO> adventureImg,
-            IServiceUserCRUD<GuideUserDTO> guideUser,
-            IServiceUserCRUD<AdventureUserDTO> adventureUser
+            IServiceCRUD<GameEntity> game,
+            IServiceCRUD<CharacterEntity> character,
+            IServiceCRUD<SourceEntity> source,
+            IServiceCRUD<BackgroundEntity> background,
+            IServiceCRUD<GuideEntity> guide,
+            IServiceCRUD<AdventureEntity> adventure,
+            IServiceCRUD<AdventureImgEntity> adventureImg,
+            IServiceUserCRUD<GuideUserEntity> guideUser,
+            IServiceUserCRUD<AdventureUserEntity> adventureUser
             )
         {
             _game = game;

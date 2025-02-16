@@ -1,5 +1,5 @@
-﻿using ClassLibrary.Common;
-using ClassLibrary.Common.Services;
+﻿using ClassLibrary.Auth.Interfaces;
+using ClassLibrary.Common.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -8,9 +8,9 @@ namespace WebApi.Filters
     public class ApiKeyFilter : IAsyncActionFilter
     {
         private readonly string ApiKeyHeaderName = "ApiKey";
-        private readonly ApiKeyService _apiKeyService;
+        private readonly IApiKeyService _apiKeyService;
 
-        public ApiKeyFilter(ApiKeyService apiKeyService)
+        public ApiKeyFilter(IApiKeyService apiKeyService)
         {
             _apiKeyService = apiKeyService;
         }

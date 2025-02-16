@@ -91,7 +91,7 @@ VALUES
 	(4, 'Portafolio v1.0', 'project_portfolio1_863x568.webp', 'https://github.com/TheNefelin/Portafolio-NextJS', 'https://portafolio-next-js-xi.vercel.app'),
 	(5, 'Portafolio v2.0', 'project_portfolio2_863x568.webp', 'https://github.com/TheNefelin/Portafolio-Angular-ssr', 'https://portafolio-angular-ssr.vercel.app'),
 	(6, 'Bier Heart Page', 'project_bierheart_863x568.webp', 'https://github.com/TheNefelin/BierHeart_Vue', 'https://www.bierheart.cl'),
-	(7, 'WebP Converter', 'project_webp_863x568.webp', 'https://github.com/TheNefelin/Testing_.NETCore/tree/master/WebAppMVC.Test', null),
+	(7, 'WebP Converter', 'project_webp_863x568.webp', 'https://github.com/TheNefelin/WebPConverter_.NETCore', null),
 	(8, 'Trueke Mobile App', 'project_trueke_863x568.webp', 'https://github.com/TheNefelin/Kambio_.NetCore', null),
 	(9, 'Password Manager Mobile App', 'project_pm_863x568.webp', 'https://github.com/TheNefelin/Portfolio_.NETCore/tree/master/MauiAppAdmin', null),
 	(10, 'Guides for Games (NextJS)', 'project_ggv1_863x568.webp', 'https://github.com/TheNefelin/game-guides-nextjs', 'https://game-guides-nextjs.vercel.app'),

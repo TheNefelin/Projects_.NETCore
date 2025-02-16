@@ -1,4 +1,4 @@
-﻿using ClassLibrary.Common;
+﻿using ClassLibrary.Common.Models;
 using ClassLibrary.PortfolioDapper.DTOs;
 
 namespace ClassLibrary.PortfolioDapper.Interfaces

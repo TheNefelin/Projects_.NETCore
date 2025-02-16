@@ -1,12 +1,12 @@
-﻿using ClassLibrary.Common;
-using ClassLibrary.GamesGuideDapper.DTOs;
+﻿using ClassLibrary.Common.Models;
+using ClassLibrary.GamesGuideDapper.Entities;
 using ClassLibrary.GamesGuideDapper.Interfaces;
 using Dapper;
 using System.Data;
 
 namespace ClassLibrary.GamesGuideDapper.Services
 {
-    public class GuideUserDapperService : IServiceUserCRUD<GuideUserDTO>
+    public class GuideUserDapperService : IServiceUserCRUD<GuideUserEntity>
     {
         private readonly IDbConnection _dapper;
 
@@ -15,11 +15,11 @@ namespace ClassLibrary.GamesGuideDapper.Services
             _dapper = dapper;
         }
 
-        public async Task<IEnumerable<GuideUserDTO>> GetAllByIdAsync(string Id_User, CancellationToken cancellationToken)
+        public async Task<IEnumerable<GuideUserEntity>> GetAllByIdAsync(string Id_User, CancellationToken cancellationToken)
         {
             try
             {
-                var result = await _dapper.QueryAsync<GuideUserDTO>(
+                var result = await _dapper.QueryAsync<GuideUserEntity>(
                     $"SELECT Id_Guide, Id_User, IsCheck FROM GG_GuidesUser WHERE Id_User = @Id_User",
                     new { Id_User }
                 );
@@ -32,7 +32,7 @@ namespace ClassLibrary.GamesGuideDapper.Services
             }
         }
 
-        public async Task<ResponseApi<object>> UpdateAsync(GuideUserDTO guideUser, CancellationToken cancellationToken)
+        public async Task<ResponseApi<object>> UpdateAsync(GuideUserEntity guideUser, CancellationToken cancellationToken)
         {
             try
             {

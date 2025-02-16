@@ -1,5 +1,5 @@
-﻿using ClassLibrary.Common;
-using ClassLibrary.Common.DTOs;
+﻿using ClassLibrary.Common.DTOs;
+using ClassLibrary.Common.Models;
 using ClassLibrary.GamesGuide.Connection;
 using ClassLibrary.GamesGuide.Interfaces;
 using Microsoft.EntityFrameworkCore;

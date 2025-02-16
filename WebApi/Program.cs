@@ -1,17 +1,20 @@
-using ClassLibrary.Common.Services;
+using ClassLibrary.Auth.Interfaces;
+using ClassLibrary.Auth.Services;
 using ClassLibrary.F1Dapper.Interfaces;
 using ClassLibrary.F1Dapper.Services;
-using ClassLibrary.GamesGuide.Connection;
-using ClassLibrary.GamesGuide.Interfaces;
-using ClassLibrary.GamesGuide.Services;
-using ClassLibrary.GamesGuideDapper.DTOs;
+using ClassLibrary.GamesGuideDapper.Entities;
 using ClassLibrary.GamesGuideDapper.Interfaces;
 using ClassLibrary.GamesGuideDapper.Services;
+using ClassLibrary.PasswordManager.Interfaces;
+using ClassLibrary.PasswordManager.Services;
 using ClassLibrary.PortfolioDapper.Interfaces;
 using ClassLibrary.PortfolioDapper.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.Data;
+using System.Text;
 using WebApi.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,10 +22,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 // DataBase Connection -----------------------------------------------
-builder.Services.AddDbContext<GamesGuideDbContext>(options => // EntityFramework Connection
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerWeb"));
-});
+//builder.Services.AddDbContext<GamesGuideDbContext>(options => // EntityFramework Connection
+//{
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerWeb"));
+//});
 
 builder.Services.AddTransient<IDbConnection>(options => // Generic Connection
     new SqlConnection(builder.Configuration.GetConnectionString("SqlServerWeb"))
@@ -34,26 +37,44 @@ builder.Services.AddScoped<SqlConnection>(options => // SqlServer Connection
 // -------------------------------------------------------------------
 
 // Dependency injection ----------------------------------------------
-builder.Services.AddTransient<IGameGuideEFService, GameGuideEFService>();
+builder.Services.AddScoped<ApiKeyFilter>();
+builder.Services.AddScoped<IApiKeyService, ApiKeyService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IAuthGoogleService, AuthGoogleService>();
 
-builder.Services.AddTransient<IServiceCRUD<GameDTO>, GameDapperService>();
-builder.Services.AddTransient<IServiceCRUD<CharacterDTO>, CharacterDapperService>();
-builder.Services.AddTransient<IServiceCRUD<SourceDTO>, SourceDapperService>();
-builder.Services.AddTransient<IServiceCRUD<BackgroundDTO>, BackgroundDapperService>();
-builder.Services.AddTransient<IServiceCRUD<GuideDTO>, GuideDapperService>();
-builder.Services.AddTransient<IServiceCRUD<AdventureDTO>, AdventureDapperService>();
-builder.Services.AddTransient<IServiceCRUD<AdventureImgDTO>, AdventureImgDapperService>();
-builder.Services.AddTransient<IServiceUserCRUD<GuideUserDTO>, GuideUserDapperService>();
-builder.Services.AddTransient<IServiceUserCRUD<AdventureUserDTO>, AdventureUserDapperService>();
+builder.Services.AddTransient<IServiceCRUD<GameEntity>, GameDapperService>();
+builder.Services.AddTransient<IServiceCRUD<CharacterEntity>, CharacterDapperService>();
+builder.Services.AddTransient<IServiceCRUD<SourceEntity>, SourceDapperService>();
+builder.Services.AddTransient<IServiceCRUD<BackgroundEntity>, BackgroundDapperService>();
+builder.Services.AddTransient<IServiceCRUD<GuideEntity>, GuideDapperService>();
+builder.Services.AddTransient<IServiceCRUD<AdventureEntity>, AdventureDapperService>();
+builder.Services.AddTransient<IServiceCRUD<AdventureImgEntity>, AdventureImgDapperService>();
+builder.Services.AddTransient<IServiceUserCRUD<GuideUserEntity>, GuideUserDapperService>();
+builder.Services.AddTransient<IServiceUserCRUD<AdventureUserEntity>, AdventureUserDapperService>();
 builder.Services.AddTransient<IGameGuideDapperService, GameGuideDapperService>();
 
 builder.Services.AddTransient<IPortfolioService, PortfolioService>();
 
 builder.Services.AddTransient<IF1Service, F1Service>();
 
-builder.Services.AddScoped<ApiKeyService>();
-builder.Services.AddScoped<AuthGoogleService>();
-builder.Services.AddScoped<ApiKeyFilter>();
+builder.Services.AddTransient<ICoreService, CoreService>();
+// -------------------------------------------------------------------
+
+// JWT Service -------------------------------------------------------
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(JwtOptions =>
+    {
+        JwtOptions.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["JWT:Issuer"],
+            ValidAudience = builder.Configuration["JWT:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]!)),
+        };
+    });
 // -------------------------------------------------------------------
 
 builder.Services.AddControllers();

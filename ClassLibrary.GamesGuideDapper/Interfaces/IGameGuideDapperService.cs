@@ -1,5 +1,5 @@
-﻿using ClassLibrary.Common;
-using ClassLibrary.Common.DTOs;
+﻿using ClassLibrary.Common.Models;
+using ClassLibrary.GamesGuideDapper.DTOs;
 
 namespace ClassLibrary.GamesGuideDapper.Interfaces
 {

@@ -1,5 +1,4 @@
-﻿
-using ClassLibrary.Common;
+﻿using ClassLibrary.Common.Models;
 using ClassLibrary.PortfolioDapper.DTOs;
 using ClassLibrary.PortfolioDapper.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +8,7 @@ namespace WebApi.Controllers
 {
     [Route("api/portfolio")]
     [ApiController]
-    [ServiceFilter(typeof(ApiKeyFilter))]
+    //[ServiceFilter(typeof(ApiKeyFilter))]
     public class PortfolioController : ControllerBase
     {
         private readonly IPortfolioService _portfolioService;

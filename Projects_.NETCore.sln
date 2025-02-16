@@ -7,13 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlServer", "SqlServer", "{5B3453C3-2210-4778-BEB6-93427EE4F104}"
 	ProjectSection(SolutionItems) = preProject
-		SqlServer_Common.sql = SqlServer_Common.sql
+		SqlServer_Auth.sql = SqlServer_Auth.sql
 		SqlServer_F1.sql = SqlServer_F1.sql
 		SqlServer_GamesGuide.sql = SqlServer_GamesGuide.sql
+		SqlServer_PasswordManager.sql = SqlServer_PasswordManager.sql
 		SqlServer_Porfolio.sql = SqlServer_Porfolio.sql
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary.GamesGuide", "ClassLibrary.GamesGuide\ClassLibrary.GamesGuide.csproj", "{26538605-4278-4A2F-B7C1-003481609A1A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary.Common", "ClassLibrary.Common\ClassLibrary.Common.csproj", "{8D874D94-06A8-4927-B6F6-318DB5696293}"
 EndProject
@@ -22,6 +21,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary.PortfolioDapper", "ClassLibrary.PortfolioDapper\ClassLibrary.PortfolioDapper.csproj", "{192ADC00-2168-4589-9488-033AC221B787}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary.F1Dapper", "ClassLibrary.F1Dapper\ClassLibrary.F1Dapper.csproj", "{F4979F06-B22A-4325-A721-85044D9FAF37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary.PasswordManager", "ClassLibrary.PasswordManager\ClassLibrary.PasswordManager.csproj", "{4B0B3BB1-26DD-4ED7-B267-082CB2386006}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary.Auth", "ClassLibrary.Auth\ClassLibrary.Auth.csproj", "{A663538F-92AC-4906-AAD7-8EA0F38B76B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +36,6 @@ Global
 		{0344107F-0A63-4B1E-A2D1-2E26A1178CA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0344107F-0A63-4B1E-A2D1-2E26A1178CA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0344107F-0A63-4B1E-A2D1-2E26A1178CA0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{26538605-4278-4A2F-B7C1-003481609A1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{26538605-4278-4A2F-B7C1-003481609A1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{26538605-4278-4A2F-B7C1-003481609A1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{26538605-4278-4A2F-B7C1-003481609A1A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8D874D94-06A8-4927-B6F6-318DB5696293}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8D874D94-06A8-4927-B6F6-318DB5696293}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D874D94-06A8-4927-B6F6-318DB5696293}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,8 +52,19 @@ Global
 		{F4979F06-B22A-4325-A721-85044D9FAF37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4979F06-B22A-4325-A721-85044D9FAF37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4979F06-B22A-4325-A721-85044D9FAF37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B0B3BB1-26DD-4ED7-B267-082CB2386006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B0B3BB1-26DD-4ED7-B267-082CB2386006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B0B3BB1-26DD-4ED7-B267-082CB2386006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B0B3BB1-26DD-4ED7-B267-082CB2386006}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A663538F-92AC-4906-AAD7-8EA0F38B76B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A663538F-92AC-4906-AAD7-8EA0F38B76B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A663538F-92AC-4906-AAD7-8EA0F38B76B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A663538F-92AC-4906-AAD7-8EA0F38B76B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {85E861C1-CB85-49B5-8F9B-D1B060C2CED0}
 	EndGlobalSection
 EndGlobal

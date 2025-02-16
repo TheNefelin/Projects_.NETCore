@@ -54,10 +54,15 @@ CREATE TABLE F1_Pilots (
 GO
 
 DROP TABLE F1_Pilots
+GO
 DROP TABLE F1_Racing
+GO
 DROP TABLE F1_Circuits
+GO
 DROP TABLE F1_Teams
+GO
 DROP TABLE F1_Flags
+GO
 
 -- Data ---------------------------------------------------------
 -- --------------------------------------------------------------

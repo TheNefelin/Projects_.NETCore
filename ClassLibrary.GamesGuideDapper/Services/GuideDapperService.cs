@@ -1,11 +1,11 @@
-﻿using ClassLibrary.GamesGuideDapper.DTOs;
+﻿using ClassLibrary.GamesGuideDapper.Entities;
 using ClassLibrary.GamesGuideDapper.Interfaces;
 using Dapper;
 using System.Data;
 
 namespace ClassLibrary.GamesGuideDapper.Services
 {
-    public class GuideDapperService : IServiceCRUD<GuideDTO>
+    public class GuideDapperService : IServiceCRUD<GuideEntity>
     {
         private readonly IDbConnection _dapper;
 
@@ -14,12 +14,12 @@ namespace ClassLibrary.GamesGuideDapper.Services
             _dapper = dapper;
         }
 
-        public async Task<IEnumerable<GuideDTO>> GetAllAsync(CancellationToken cancellationToken)
+        public async Task<IEnumerable<GuideEntity>> GetAllAsync(CancellationToken cancellationToken)
         {
             var query = "SELECT Id, Name, Sort, Id_Game FROM GG_Guides";
             try
             {
-                var result = await _dapper.QueryAsync<GuideDTO>(query);
+                var result = await _dapper.QueryAsync<GuideEntity>(query);
                 return result;
             }
             catch (Exception ex)

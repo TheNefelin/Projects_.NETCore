@@ -1,4 +1,4 @@
-﻿using ClassLibrary.Common;
+﻿using ClassLibrary.Common.Models;
 using ClassLibrary.F1Dapper.DTOs;
 
 namespace ClassLibrary.F1Dapper.Interfaces

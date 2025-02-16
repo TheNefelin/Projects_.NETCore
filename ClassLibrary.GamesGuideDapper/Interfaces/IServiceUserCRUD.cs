@@ -1,4 +1,4 @@
-﻿using ClassLibrary.Common;
+﻿using ClassLibrary.Common.Models;
 
 namespace ClassLibrary.GamesGuideDapper.Interfaces
 {
