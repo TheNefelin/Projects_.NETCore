@@ -13,9 +13,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ClassLibrary.Auth\ClassLibrary.Auth.csproj" />
+    <ProjectReference Include="..\ClassLibrary.Common\ClassLibrary.Common.csproj" />
     <ProjectReference Include="..\ClassLibrary.F1Dapper\ClassLibrary.F1Dapper.csproj" />
     <ProjectReference Include="..\ClassLibrary.GamesGuideDapper\ClassLibrary.GamesGuideDapper.csproj" />
-    <ProjectReference Include="..\ClassLibrary.PasswordManager\ClassLibrary.PasswordManager.csproj" />
+    <ProjectReference Include="..\ClassLibrary.PasswordManagerDapper\ClassLibrary.PasswordManagerDapper.csproj" />
     <ProjectReference Include="..\ClassLibrary.PortfolioDapper\ClassLibrary.PortfolioDapper.csproj" />
   </ItemGroup>
 

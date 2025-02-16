@@ -5,14 +5,15 @@ using ClassLibrary.F1Dapper.Services;
 using ClassLibrary.GamesGuideDapper.Entities;
 using ClassLibrary.GamesGuideDapper.Interfaces;
 using ClassLibrary.GamesGuideDapper.Services;
-using ClassLibrary.PasswordManager.Interfaces;
-using ClassLibrary.PasswordManager.Services;
+using ClassLibrary.PasswordManagerDapper.Interfaces;
+using ClassLibrary.PasswordManagerDapper.Services;
 using ClassLibrary.PortfolioDapper.Interfaces;
 using ClassLibrary.PortfolioDapper.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Data;
 using System.Text;
 using WebApi.Filters;
@@ -60,7 +61,7 @@ builder.Services.AddTransient<IF1Service, F1Service>();
 builder.Services.AddTransient<ICoreService, CoreService>();
 // -------------------------------------------------------------------
 
-// JWT Service -------------------------------------------------------
+// Add JWT Service to Swagger ----------------------------------------
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(JwtOptions =>
@@ -70,6 +71,8 @@ builder.Services
             ValidateIssuer = true,
             ValidateAudience = true,
             ValidateIssuerSigningKey = true,
+            ValidateLifetime = true, // Valida el tiempo de expiración del token
+            ClockSkew = TimeSpan.Zero, // Evita tolerancia de tiempo adicional
             ValidIssuer = builder.Configuration["JWT:Issuer"],
             ValidAudience = builder.Configuration["JWT:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]!)),
@@ -80,7 +83,26 @@ builder.Services
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+// Add Padlock and Authorize to Swagger ------------------------------
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSecurityDefinition(
+        name: JwtBearerDefaults.AuthenticationScheme,
+        securityScheme: new OpenApiSecurityScheme
+        {
+            Name = "Authorization",
+            Description = "Ingrese Token Bearer",
+            In = ParameterLocation.Header,
+            Type = SecuritySchemeType.ApiKey,
+            BearerFormat = "JWT",
+            Scheme = JwtBearerDefaults.AuthenticationScheme
+        }
+    );
+
+    options.OperationFilter<SwaggerApiPadLockFilter>();
+});
+// -------------------------------------------------------------------
 
 var app = builder.Build();
 

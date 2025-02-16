@@ -8,6 +8,7 @@ namespace WebApi.Controllers
 {
     [Route("api/auth")]
     [ApiController]
+    [ServiceFilter(typeof(ApiKeyFilter))]
     public class AuthController : ControllerBase
     {
         private readonly IConfiguration _configuration;

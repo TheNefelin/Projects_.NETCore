@@ -8,7 +8,7 @@ namespace WebApi.Controllers
 {
     [Route("api/f1")]
     [ApiController]
-    //[ServiceFilter(typeof(ApiKeyFilter))]
+    [ServiceFilter(typeof(ApiKeyFilter))]
     public class F1Controller : ControllerBase
     {
         private readonly ILogger<F1Controller> _logger;

@@ -9,7 +9,7 @@ namespace WebApi.Controllers
 {
     [Route("api/game-guide")]
     [ApiController]
-    //[ServiceFilter(typeof(ApiKeyFilter))]
+    [ServiceFilter(typeof(ApiKeyFilter))]
     public class GameGuideController : ControllerBase
     {
         private readonly ILogger<GameGuideController> _logger;

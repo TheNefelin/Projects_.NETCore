@@ -106,6 +106,7 @@ BEGIN
 		SELECT 0 AS IsSucces, ERROR_STATE() AS StatusCode, ERROR_MESSAGE() AS Msge
     END CATCH
 END
+GO
 
 CREATE PROCEDURE Auth_Login
 	@Email VARCHAR(100)
@@ -133,6 +134,7 @@ BEGIN
 	WHERE 
 		a.Email = @Email 
 END
+GO
 
 DROP PROCEDURE Auth_Register
 GO

@@ -1,12 +1,16 @@
 ﻿using ClassLibrary.Common.Models;
-using ClassLibrary.PasswordManager.DTOs;
-using ClassLibrary.PasswordManager.Interfaces;
+using ClassLibrary.PasswordManagerDapper.DTOs;
+using ClassLibrary.PasswordManagerDapper.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
     [Route("api/core")]
     [ApiController]
+    [Authorize]
+    [ServiceFilter(typeof(ApiKeyFilter))]
     public class CoreController : ControllerBase
     {
         private readonly ICoreService _coreService;
