@@ -13,11 +13,28 @@ namespace WebApi.Controllers
     {
         private readonly ILogger<F1Controller> _logger;
         private readonly IF1Service _service;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public F1Controller(ILogger<F1Controller> logger, IF1Service service)
+        public F1Controller(ILogger<F1Controller> logger, IF1Service service, IWebHostEnvironment webHostEnvironment)
         {
             _logger = logger;
             _service = service;
+        }
+
+        [HttpGet("img")]
+        public IActionResult GetImg(string fileName)
+        {
+            string path = Path.Combine(_webHostEnvironment.WebRootPath, "F1");
+            var filePath = Path.Combine(path, fileName);
+
+            if (System.IO.File.Exists(filePath))
+            {
+                byte[] b = System.IO.File.ReadAllBytes(filePath);
+
+                return File(b, "image/webp");
+            }
+
+            return BadRequest(new { Msge = "El Archivo No Existe" });
         }
 
         [HttpGet("teams")]

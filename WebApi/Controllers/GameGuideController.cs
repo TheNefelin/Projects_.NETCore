@@ -17,26 +17,38 @@ namespace WebApi.Controllers
         private readonly IServiceUserCRUD<GuideUserEntity> _guideUser;
         private readonly IServiceUserCRUD<AdventureUserEntity> _adventureUser;
         private readonly IAuthGoogleService _authGoogleService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
         public GameGuideController(
             ILogger<GameGuideController> logger,
             IServiceUserCRUD<GuideUserEntity> guideUser,
             IServiceUserCRUD<AdventureUserEntity> adventureUser,
             IGameGuideDapperService dapper,
-            IAuthGoogleService authGoogleService)
+            IAuthGoogleService authGoogleService,
+            IWebHostEnvironment webHostEnvironment)
         {
             _logger = logger;
             _guideUser = guideUser;
             _adventureUser = adventureUser;
             _dapper = dapper;
             _authGoogleService = authGoogleService;
+            _webHostEnvironment = webHostEnvironment;
         }
 
-        [HttpPost("auth-google")]
-        public async Task<ActionResult<ResponseApi<LoggedToken>>> GoogleLoginAsync(LoginGoogle login, CancellationToken cancellationToken)
+        [HttpGet("img")]
+        public IActionResult GetImg(string fileName)
         {
-            var result = await _authGoogleService.LoginGoogleAsync(login, cancellationToken);
-            return StatusCode(result.StatusCode, result);
+            string path = Path.Combine(_webHostEnvironment.WebRootPath, "GamesGuide");
+            var filePath = Path.Combine(path, fileName);
+
+            if (System.IO.File.Exists(filePath))
+            {
+                byte[] b = System.IO.File.ReadAllBytes(filePath);
+
+                return File(b, "image/webp");
+            }
+
+            return BadRequest(new { Msge = "El Archivo No Existe" });
         }
 
         [HttpGet("{iduser?}")]
@@ -45,6 +57,13 @@ namespace WebApi.Controllers
             _logger.LogInformation("Received request to fetch all games.");
             var result = await _dapper.GetAllAsync(iduser, cancellationToken);
 
+            return StatusCode(result.StatusCode, result);
+        }
+
+        [HttpPost("auth-google")]
+        public async Task<ActionResult<ResponseApi<LoggedToken>>> GoogleLoginAsync(LoginGoogle login, CancellationToken cancellationToken)
+        {
+            var result = await _authGoogleService.LoginGoogleAsync(login, cancellationToken);
             return StatusCode(result.StatusCode, result);
         }
 

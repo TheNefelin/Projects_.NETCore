@@ -12,10 +12,27 @@ namespace WebApi.Controllers
     public class PortfolioController : ControllerBase
     {
         private readonly IPortfolioService _portfolioService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public PortfolioController(IPortfolioService portfolioService)
+        public PortfolioController(IPortfolioService portfolioService, IWebHostEnvironment webHostEnvironment)
         {
             _portfolioService = portfolioService;
+        }
+
+        [HttpGet("img")]
+        public IActionResult GetImg(string fileName)
+        {
+            string path = Path.Combine(_webHostEnvironment.WebRootPath, "Portfolio");
+            var filePath = Path.Combine(path, fileName);
+
+            if (System.IO.File.Exists(filePath))
+            {
+                byte[] b = System.IO.File.ReadAllBytes(filePath);
+
+                return File(b, "image/webp");
+            }
+
+            return BadRequest(new { Msge = "El Archivo No Existe" });
         }
 
         [HttpGet("projects")]
@@ -31,6 +48,5 @@ namespace WebApi.Controllers
             var res = await _portfolioService.GetAll_Urls_Async(cancellationToken);
             return StatusCode(res.StatusCode, res);
         }
-
     }
 }
