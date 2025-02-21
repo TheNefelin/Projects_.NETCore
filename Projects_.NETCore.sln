@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlServer", "SqlServer", "{
 	ProjectSection(SolutionItems) = preProject
 		SqlServer_Auth.sql = SqlServer_Auth.sql
 		SqlServer_F1.sql = SqlServer_F1.sql
-		SqlServer_GamesGuide.sql = SqlServer_GamesGuide.sql
+		SqlServer_GameGuide.sql = SqlServer_GameGuide.sql
 		SqlServer_PasswordManager.sql = SqlServer_PasswordManager.sql
 		SqlServer_Porfolio.sql = SqlServer_Porfolio.sql
 	EndProjectSection

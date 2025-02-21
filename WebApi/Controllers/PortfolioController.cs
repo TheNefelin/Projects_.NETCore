@@ -17,6 +17,7 @@ namespace WebApi.Controllers
         public PortfolioController(IPortfolioService portfolioService, IWebHostEnvironment webHostEnvironment)
         {
             _portfolioService = portfolioService;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet("img")]

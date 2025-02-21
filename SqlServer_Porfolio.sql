@@ -88,14 +88,15 @@ VALUES
 	(1, 'Transbank POS Integration', 'project_pos_863x568.webp', 'https://github.com/TheNefelin/Transbank_POS_v1', null),
 	(2, 'Arduino DHT Temperature Monitoring by Network', 'project_dht_863x568.webp', 'https://github.com/TheNefelin/DHT', null),
 	(3, 'El Cubo v2.0', 'project_cube2_863x568.webp', null, null),
-	(4, 'Portafolio v1.0', 'project_portfolio1_863x568.webp', 'https://github.com/TheNefelin/Portafolio-NextJS', 'https://portafolio-next-js-sand.vercel.app/'),
+	(4, 'Portafolio v1.0', 'project_portfolio1_863x568.webp', 'https://github.com/TheNefelin/Portafolio-NextJS', 'https://portafolio-next-js-sand.vercel.app'),
 	(5, 'Portafolio v2.0', 'project_portfolio2_863x568.webp', 'https://github.com/TheNefelin/Portafolio-Angular-ssr', 'https://portafolio-angular-ssr.vercel.app'),
 	(6, 'Bier Heart Page', 'project_bierheart_863x568.webp', 'https://github.com/TheNefelin/BierHeart_Vue', 'https://www.bierheart.cl'),
 	(7, 'WebP Converter', 'project_webp_863x568.webp', 'https://github.com/TheNefelin/WebPConverter_.NETCore', null),
 	(8, 'Trueke Mobile App', 'project_trueke_863x568.webp', 'https://github.com/TheNefelin/Kambio_.NetCore', null),
 	(9, 'Password Manager Mobile App', 'project_pm_863x568.webp', 'https://github.com/TheNefelin/Portfolio_.NETCore/tree/master/MauiAppAdmin', null),
 	(10, 'Guides for Games (NextJS)', 'project_ggv1_863x568.webp', 'https://github.com/TheNefelin/game-guides-nextjs', 'https://game-guides-nextjs.vercel.app'),
-	(11, 'Portafolio v3.0', 'project_portfolio3_863x568.webp', 'https://github.com/TheNefelin/portfolio-astro', 'https://www.francisco-dev.cl')
+	(11, 'Portafolio v3.0 (Astro)', 'project_portfolio3_863x568.webp', 'https://github.com/TheNefelin/portfolio-astro', 'https://www.francisco-dev.cl'),
+	(12, 'WebApi', 'project_webapi_863x568.webp', 'https://github.com/TheNefelin/Projects_.NETCore', 'https://dragonra.bsite.net/index.html')
 SET IDENTITY_INSERT PF_Projects OFF
 GO
 
@@ -162,7 +163,8 @@ VALUES
 	(10, 6),
 	(11, 2),
 	(11, 3),
-	(11, 6)
+	(11, 6),
+	(12, 1)
 GO
 
 INSERT INTO PF_Pro_Tech
@@ -198,7 +200,10 @@ VALUES
 	(11, 6),
 	(11, 12),
 	(11, 15),
-	(11, 17)
+	(11, 17),
+	(12, 3),
+	(12, 6),
+	(12, 14)
 GO
 
 SET IDENTITY_INSERT PF_UrlGrp ON

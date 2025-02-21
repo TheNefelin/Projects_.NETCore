@@ -19,6 +19,7 @@ namespace WebApi.Controllers
         {
             _logger = logger;
             _service = service;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet("img")]
