@@ -96,7 +96,7 @@ VALUES
 	(9, 'Password Manager Mobile App', 'project_pm_863x568.webp', 'https://github.com/TheNefelin/Portfolio_.NETCore/tree/master/MauiAppAdmin', null),
 	(10, 'Guides for Games (NextJS)', 'project_ggv1_863x568.webp', 'https://github.com/TheNefelin/game-guides-nextjs', 'https://game-guides-nextjs.vercel.app'),
 	(11, 'Portafolio v3.0 (Astro)', 'project_portfolio3_863x568.webp', 'https://github.com/TheNefelin/portfolio-astro', 'https://www.francisco-dev.cl'),
-	(12, 'WebApi', 'project_webapi_863x568.webp', 'https://github.com/TheNefelin/Projects_.NETCore', 'https://dragonra.bsite.net/index.html')
+	(12, 'WebApi for Projects', 'project_webapi_863x568.webp', 'https://github.com/TheNefelin/Projects_.NETCore', 'https://dragonra.bsite.net/index.html')
 SET IDENTITY_INSERT PF_Projects OFF
 GO
 
