@@ -44,9 +44,9 @@ CREATE TABLE Auth_Users (
 	HashPM VARCHAR(256),
 	SaltPM VARCHAR(256),
 	SqlToken VARCHAR(256) ,
-	Id_Profile INT NOT NULL
+	IdProfile INT NOT NULL
 	UNIQUE(Email),
-	FOREIGN KEY (Id_Profile) REFERENCES Auth_Profiles(Id)
+	FOREIGN KEY (IdProfile) REFERENCES Auth_Profiles(Id)
 ) 
 GO
 
@@ -74,7 +74,7 @@ GO
 -- --------------------------------------------------------------
 
 CREATE PROCEDURE Auth_Register
-	@Id VARCHAR(256),
+	@IdUser VARCHAR(256),
 	@Email VARCHAR(100),
 	@HashLogin VARCHAR(256),
 	@SaltLogin VARCHAR(256)
@@ -98,7 +98,7 @@ BEGIN
 		INSERT INTO Auth_Users
 			(Id, Email, HashLogin, SaltLogin, Id_Profile)
 		VALUES
-			(@Id, @Email, @HashLogin, @SaltLogin, 2)
+			(@IdUser, @Email, @HashLogin, @SaltLogin, 2)
 
 		SELECT 1 AS IsSucces, 201 AS StatusCode, 'Usuario Registrado Correctamente' AS Msge
     END TRY
@@ -120,17 +120,17 @@ BEGIN
 		Email = @Email 
 
 	SELECT 
-		a.Id,
+		a.Id AS IdUser,
 		a.Email,
 		a.HashLogin,
 		a.SaltLogin,
 		a.HashPM,
 		a.SaltPM,
 		a.SqlToken,
-		--a.Id_Perfil,
+		--a.IdPerfil,
 		b.Name AS Role
 	FROM Auth_Users a 
-		INNER JOIN Auth_Profiles b ON a.Id_Profile = b.Id
+		INNER JOIN Auth_Profiles b ON a.IdProfile = b.Id
 	WHERE 
 		a.Email = @Email 
 END

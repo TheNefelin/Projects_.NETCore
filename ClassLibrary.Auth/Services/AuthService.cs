@@ -37,7 +37,7 @@ namespace ClassLibrary.Auth.Services
                 var result = await _connection.QueryFirstAsync<ResponseSql>(
                     new CommandDefinition(
                         $"Auth_Register",
-                        new { Id = Guid.NewGuid().ToString(), register.Email, HashLogin = hash, SaltLogin = salt },
+                        new { IdUser = Guid.NewGuid().ToString(), register.Email, HashLogin = hash, SaltLogin = salt },
                         commandType: CommandType.StoredProcedure,
                         transaction: default,
                         cancellationToken: cancellationToken
@@ -95,7 +95,7 @@ namespace ClassLibrary.Auth.Services
 
                 var jwtUser = new JwtUser
                 {
-                    Id = user.Id,
+                    IdUser = user.IdUser,
                     Email = user.Email,
                     Role = user.Role,
                 };
@@ -104,7 +104,7 @@ namespace ClassLibrary.Auth.Services
 
                 var logged = new AuthLogged()
                 {
-                    Id = user.Id,
+                    IdUser = user.IdUser,
                     SqlToken = user.SqlToken,
                     Role = user.Role,
                     ExpireMin = jwtConfig.ExpireMin,

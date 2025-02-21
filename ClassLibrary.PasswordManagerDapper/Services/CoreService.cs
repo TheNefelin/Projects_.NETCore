@@ -44,7 +44,7 @@ namespace ClassLibrary.PasswordManagerDapper.Services
                 var (hash, salt) = _passwordUtil.HashPassword(request.Password);
 
                 await _connection.ExecuteAsync(
-                    $"UPDATE Auth_Users SET HashPM = @HashPM, SaltPM = @SaltPM WHERE Id = @Id AND SqlToken = @SqlToken",
+                    $"UPDATE Auth_Users SET HashPM = @HashPM, SaltPM = @SaltPM WHERE Id = @IdUser AND SqlToken = @SqlToken",
                     new { HashPM = hash, SaltPM = salt, Id = request.IdUser, request.SqlToken }
                 );
 
@@ -209,12 +209,12 @@ namespace ClassLibrary.PasswordManagerDapper.Services
                     };
 
                 var Id = await _connection.QueryFirstOrDefaultAsync<int>(
-                    $"INSERT INTO PM_Core (Data01, Data02, Data03, Id_User) OUTPUT inserted.Id VALUES (@Data01, @Data02, @Data03, @IdUser)",
+                    $"INSERT INTO PM_Core (Data01, Data02, Data03, IdUser) OUTPUT inserted.Id VALUES (@Data01, @Data02, @Data03, @IdUser)",
                     new { request.CoreData.Data01, request.CoreData.Data02, request.CoreData.Data03, request.IdUser }
                 );
 
                 request.CoreData.Id = Id;
-                request.CoreData.Id_User = authUser.Id;
+                request.CoreData.IdUser = authUser.IdUser;
 
                 return new ResponseApi<CoreDTO>
                 {
@@ -254,7 +254,7 @@ namespace ClassLibrary.PasswordManagerDapper.Services
                     new { request.CoreData.Data01, request.CoreData.Data02, request.CoreData.Data03, request.CoreData.Id, request.IdUser }
                 );
 
-                request.CoreData.Id_User = authUser.Id;
+                request.CoreData.IdUser = authUser.IdUser;
 
                 return new ResponseApi<CoreDTO>
                 {

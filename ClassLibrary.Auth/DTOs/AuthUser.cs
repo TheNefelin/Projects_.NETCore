@@ -2,7 +2,7 @@
 {
     public class AuthUser
     {
-        public string Id { get; set; } = string.Empty;
+        public string IdUser { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string HashLogin { get; set; } = string.Empty;
         public string SaltLogin { get; set; } = string.Empty;

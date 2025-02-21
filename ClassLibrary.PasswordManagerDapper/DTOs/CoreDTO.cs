@@ -17,6 +17,6 @@ namespace ClassLibrary.PasswordManagerDapper.DTOs
         public string Data03 { get; set; } = string.Empty;
         [Required]
         [MaxLength(100)]
-        public string Id_User { get; set; } = string.Empty;
+        public string IdUser { get; set; } = string.Empty;
     }
 }
