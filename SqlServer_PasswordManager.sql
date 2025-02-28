@@ -7,8 +7,8 @@ CREATE TABLE PM_Core (
 	Data01 VARCHAR(256) NOT NULL,
 	Data02 VARCHAR(256) NOT NULL,
 	Data03 VARCHAR(256) NOT NULL,
-	Id_User VARCHAR(256) NOT NULL
-	FOREIGN KEY (Id_User) REFERENCES Auth_Users(Id)
+	IdUser VARCHAR(256) NOT NULL
+	FOREIGN KEY (IdUser) REFERENCES Auth_Users(Id)
 )
 GO
 
@@ -33,11 +33,11 @@ SELECT
 	a.SqlToken,
 	b.Name AS Role
 FROM Auth_Users a
-	INNER JOIN Auth_Profiles b ON a.Id_Profile = b.Id
+	INNER JOIN Auth_Profiles b ON a.IdProfile = b.Id
 
-SELECT Id, Data01, Data02, Data03, Id_User 
+SELECT Id, Data01, Data02, Data03, IdUser 
 FROM PM_Core 
-WHERE Id_User = 'cddf8d84-37d4-4c53-be39-53c95cb10a65'
+WHERE IdUser = 'cddf8d84-37d4-4c53-be39-53c95cb10a65'
 
 -- --------------------------------------------------------------
 -- --------------------------------------------------------------

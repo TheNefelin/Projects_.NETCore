@@ -45,7 +45,7 @@ namespace ClassLibrary.PasswordManagerDapper.Services
 
                 await _connection.ExecuteAsync(
                     $"UPDATE Auth_Users SET HashPM = @HashPM, SaltPM = @SaltPM WHERE Id = @IdUser AND SqlToken = @SqlToken",
-                    new { HashPM = hash, SaltPM = salt, Id = request.IdUser, request.SqlToken }
+                    new { HashPM = hash, SaltPM = salt, request.IdUser, request.SqlToken }
                 );
 
                 return new ResponseApi<CoreIVDTO>
@@ -125,7 +125,7 @@ namespace ClassLibrary.PasswordManagerDapper.Services
                     };
 
                 var core = await _connection.QueryAsync<CoreDTO>(
-                    $"SELECT Id, Data01, Data02, Data03, Id_User FROM PM_Core WHERE Id_User = @IdUser",
+                    $"SELECT Id, Data01, Data02, Data03, IdUser FROM PM_Core WHERE IdUser = @IdUser",
                     new { request.IdUser }
                 );
 
@@ -144,52 +144,6 @@ namespace ClassLibrary.PasswordManagerDapper.Services
                     IsSucces = false,
                     StatusCode = 500,
                     Message = "Error en (GetAllAsync): " + ex.Message
-                };
-            }
-        }
-
-        public async Task<ResponseApi<CoreDTO>> GetByIdAsync(CoreRequestDTO<CoreDTO> request, CancellationToken cancellationToken)
-        {
-            try
-            {
-                var authUser = await GetUser(request.IdUser, request.SqlToken);
-
-                if (authUser == null)
-                    return new ResponseApi<CoreDTO>
-                    {
-                        IsSucces = false,
-                        StatusCode = 401,
-                        Message = "No Estas Autorizado."
-                    };
-
-                var core = await _connection.QueryFirstOrDefaultAsync<CoreDTO>(
-                    $"SELECT Id, Data01, Data02, Data03, Id_User FROM PM_Core WHERE Id_User = @IdUser AND Id = @Id",
-                    new { request.IdUser, request.CoreData.Id }
-                );
-
-                if (core == null)
-                    return new ResponseApi<CoreDTO>
-                    {
-                        IsSucces = false,
-                        StatusCode = 404,
-                        Message = "Registro No Encontrado."
-                    };
-
-                return new ResponseApi<CoreDTO>
-                {
-                    IsSucces = true,
-                    StatusCode = 200,
-                    Message = "Ok",
-                    Data = core
-                };
-            }
-            catch (Exception ex)
-            {
-                return new ResponseApi<CoreDTO>
-                {
-                    IsSucces = false,
-                    StatusCode = 500,
-                    Message = "Error en la operación de base de datos: " + ex.Message
                 };
             }
         }
@@ -250,7 +204,7 @@ namespace ClassLibrary.PasswordManagerDapper.Services
                     };
 
                 var Id = await _connection.QueryFirstOrDefaultAsync<int>(
-                    $"UPDATE PM_Core SET Data01 = @Data01, Data02 = @Data02, Data03 = @Data03 OUTPUT inserted.Id WHERE Id = @Id AND Id_User = @IdUser",
+                    $"UPDATE PM_Core SET Data01 = @Data01, Data02 = @Data02, Data03 = @Data03 OUTPUT inserted.Id WHERE Id = @Id AND IdUser = @IdUser",
                     new { request.CoreData.Data01, request.CoreData.Data02, request.CoreData.Data03, request.CoreData.Id, request.IdUser }
                 );
 
@@ -290,7 +244,7 @@ namespace ClassLibrary.PasswordManagerDapper.Services
                     };
 
                 await _connection.ExecuteAsync(
-                    $"DELETE FROM PM_Core WHERE Id = @Id AND Id_User = @IdUser",
+                    $"DELETE FROM PM_Core WHERE Id = @Id AND IdUser = @IdUser",
                     new { request.CoreData.Id, request.IdUser }
                 );
 
@@ -315,8 +269,8 @@ namespace ClassLibrary.PasswordManagerDapper.Services
         private async Task<AuthUser?> GetUser(string IdUser, string SqlToken)
         {
             return await _connection.QueryFirstOrDefaultAsync<AuthUser>(
-                $"SELECT a.Id, a.Email, a.HashLogin, a.SaltLogin, a.HashPM, a.SaltPM, a.SqlToken, b.Name AS Role FROM Auth_Users a INNER JOIN Auth_Profiles b ON a.Id_Profile = b.Id WHERE a.Id = @Id AND a.SqlToken = @SqlToken",
-                new { Id = IdUser, SqlToken }
+                $"SELECT a.Id AS IdUser, a.Email, a.HashLogin, a.SaltLogin, a.HashPM, a.SaltPM, a.SqlToken, b.Name AS Role FROM Auth_Users a INNER JOIN Auth_Profiles b ON a.IdProfile = b.Id WHERE a.Id = @IdUser AND a.SqlToken = @SqlToken",
+                new { IdUser, SqlToken }
             );
         }
     }

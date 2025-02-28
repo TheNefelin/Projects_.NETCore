@@ -8,7 +8,6 @@ namespace ClassLibrary.PasswordManagerDapper.Interfaces
         Task<ResponseApi<CoreIVDTO>> RegisterAsync(CoreRequestDTO<object> request, CancellationToken cancellationToken);
         Task<ResponseApi<CoreIVDTO>> GetIVAsync(CoreRequestDTO<object> request, CancellationToken cancellationToken);
         Task<ResponseApi<IEnumerable<CoreDTO>>> GetAllAsync(CoreRequestDTO<object> request, CancellationToken cancellationToken);
-        Task<ResponseApi<CoreDTO>> GetByIdAsync(CoreRequestDTO<CoreDTO> request, CancellationToken cancellationToken);
         Task<ResponseApi<CoreDTO>> InsertAsync(CoreRequestDTO<CoreDTO> request, CancellationToken cancellationToken);
         Task<ResponseApi<CoreDTO>> UpdateAsync(CoreRequestDTO<CoreDTO> request, CancellationToken cancellationToken);
         Task<ResponseApi<object>> DeleteAsync(CoreRequestDTO<CoreDTO> request, CancellationToken cancellationToken);

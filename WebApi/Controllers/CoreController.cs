@@ -41,13 +41,6 @@ namespace WebApi.Controllers
             return StatusCode(response.StatusCode, response);
         }
 
-        [HttpPatch("get-byid")]
-        public async Task<ActionResult<ResponseApi<CoreDTO>>> GetById(CoreRequestDTO<CoreDTO> request, CancellationToken cancellationToken)
-        {
-            var response = await _coreService.GetByIdAsync(request, cancellationToken);
-            return StatusCode(response.StatusCode, response);
-        }
-
         [HttpPatch("insert")]
         public async Task<ActionResult<ResponseApi<CoreDTO>>> Insert(CoreRequestDTO<CoreDTO> request, CancellationToken cancellationToken)
         {
