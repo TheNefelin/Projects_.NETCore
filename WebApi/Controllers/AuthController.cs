@@ -29,7 +29,7 @@ namespace WebApi.Controllers
 
         //[ServiceFilter(typeof(ApiKeyFilter))]
         [HttpPost("register")]
-        public async Task<ActionResult<ResponseApi<object>>> Register(AuthRegister register, CancellationToken cancellationToken)
+        public async Task<ActionResult<ResponseApi<UserIdDTO>>> Register(AuthRegister register, CancellationToken cancellationToken)
         {
             var response = await _authService.RegisterAsync(register, cancellationToken);
             return StatusCode(response.StatusCode, response);
